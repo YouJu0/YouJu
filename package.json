@@ -1,0 +1,14 @@
+{
+  "name": "youju",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "style": "npx tailwindcss -i ./input.css -o ./src/main.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}
