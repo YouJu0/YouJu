@@ -19,7 +19,7 @@
   </header>
   <div>
     <h1>Titulo</h1>
-    <a href="sessionClose.php"> Cerrar sesión </a>
+    <a href="./pages/apis/sessionClose.php"> Cerrar sesión </a>
     <p>Bienvenido</p>
   </div>
 </body>
