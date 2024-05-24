@@ -23,25 +23,24 @@ if (isset($_POST["Email"]) && isset($_POST["Pass"])) {
     if ($resultado->num_rows === 1) {
       $fila = $resultado->fetch_row();
       if ($fila[2] === $Email && $fila[3] === $passcypt) {
-        $_SESSION['Email'] === $fila[2];
-        $_SESSION['Name'] === $fila[1];
-        $_SESSION['ID_User'] === $fila[0];
-        header("Location: ../../index.php");
+        $datosSesion = array('ID' => $fila[0], 'Nombre' => $fila[1], 'Correo' => $fila[2], 'PassW' => $fila[3]);
+        $_SESSION['sesionMain'] = $datosSesion;
+        header("Location:../../index.php");
         $resultado->close();
         exit();
       } else {
-        header("Location: index.php?error=el usuario o la contraseña es incorrecto 1 '$Email' '$passcypt'");
+        header("Location: ../login.php?error=el usuario o la contraseña es incorrecto 1 '$Email' '$passcypt'");
         $resultado->close();
         exit();
       }
     } else {
-      header("Location: index.php?error=el usuario o la contraseña es incorrecto 2  '$Email' '$passcypt'");
+      header("Location: ../login.php?error=el usuario o la contraseña es incorrecto 2  '$Email' '$passcypt'");
       $resultado->close();
       exit();
     }
   }
 } else {
-  header("Location: ../index.php");
+  header("Location: ../login.php?error=los campos son obligatorios");
   $resultado->close();
   exit();
 }

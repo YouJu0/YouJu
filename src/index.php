@@ -10,16 +10,13 @@
 </head>
 
 <body>
-  <header class="flex flex-row w-full h-[70px] bg-gray-100 justify-between items-center gap-4 px-6">
-    <div class="flex items-center">
-      <img src="./assets/menu.svg" alt="" class="h-14 w-auto">
-      <h2>YouJu</h2>
-    </div>
+  <header class="flex flex-row w-full h-12 bg-gray-100 justify-between items-center gap-4 px-10">
+    <h2>YouJu</h2>
     <div class=""><a href="./pages/login.php">Iniciar sesion</a></div>
   </header>
   <div>
     <h1>Titulo</h1>
-    <a href="./pages/apis/sessionClose.php"> Cerrar sesión </a>
+    <a href="./pages/apis/sessionClose_API.php"> Cerrar sesión </a>
     <p>Bienvenido</p>
   </div>
 </body>
