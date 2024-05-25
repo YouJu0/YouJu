@@ -33,11 +33,11 @@ if (isset($_SESSION['sesionMain'])) {
     <label for="">Nombre :</label>
     <input type="text" name="name" placeholder="Ingrese su nombre" required>
     <label for="">Email :</label>
-    <input type="email" name="email" placeholder="ingrese su correo electronico" pattern=".+@.*\..*" required>
+    <input type="email" name="email" placeholder="Ingrese su correo electronico" pattern=".+@.*\..*" required>
     <label for="">Contraseña :</label>
-    <input type="text" name="password" placeholder="ingrese su password" required>
+    <input type="text" name="pass" placeholder="Ingrese su contraseña" required>
     <label for="">Confirmar Contraseña :</label>
-    <input type="text" name="confirmPassword" placeholder="vuelva a ingresar su password" required>
+    <input type="text" name="confirmPass" placeholder="Vuelva a ingresar su contraseña" required>
     <button type="submit">Registrarse</button>
     <a href="./login.php">ingresar</a>
   </form>

@@ -11,5 +11,6 @@ session_set_cookie_params([
 session_start();
 
 if (isset($_SESSION['sesionMain'])) {
+
   session_regenerate_id(true); // Vuelve a generar el ID de sesión para mejorar la seguridad, lo lei por ahi :D
 }

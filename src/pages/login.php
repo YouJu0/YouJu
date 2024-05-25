@@ -4,6 +4,7 @@ if (isset($_SESSION['sesionMain'])) {
   header("Location:../index.php");
   session_set_cookie_params(60 * 0.5);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +18,7 @@ if (isset($_SESSION['sesionMain'])) {
 
 <body>
   <form action="./apis/loginApi.php" method="POST">
-    <h1> Iniciar sesión</h1>
+    <h1> Iniciar sesion</h1>
     <hr>
     <?php
     if (isset($_GET['error'])) {
@@ -32,10 +33,10 @@ if (isset($_SESSION['sesionMain'])) {
     ?>
     <hr>
     <label for="">Email: </label>
-    <input type="email" name="email" placeholder="Ingrese su correo electrónico">
+    <input type="email" name="email" placeholder="Ingrese su correo electronico">
     <label for="">Contraseña: </label>
-    <input type="password" name="password" placeholder="Ingrese su contraseña" required>
-    <button type="submit">Iniciar sesión</button>
+    <input type="text" name="pass" placeholder="Ingrese su contraseña" required>
+    <button type="submit">Iniciar sesion</button>
     <a href="./register.php">Registrarse</a>
   </form>
 </body>

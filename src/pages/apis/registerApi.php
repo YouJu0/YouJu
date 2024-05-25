@@ -1,61 +1,58 @@
 <?php
-require_once("../../conexion.php");
-require_once("../../tools/crypter.php");
+include("../../conexion.php");
+include("../../tools/crypter.php");
 
-// Verifica si los campos no están vacíos
+//verifica si los campos no estan vacios
 if (
-  isset($_POST["email"]) &&
-  isset($_POST["password"]) &&
-  isset($_POST["confirmPassword"]) &&
-  isset($_POST["name"])
+  isset($_POST["email"])
+  && isset($_POST["pass"])
+  && isset($_POST["confirmPass"])
+  && isset($_POST["email"])
 ) {
-  // Función para validar los datos
+  //funcion para verificar los datos
   function validarRegistro($datos)
   {
     $datos = trim($datos);
-    $datos = stripslashes($datos);
+    $datos = stripcslashes($datos);
     $datos = htmlspecialchars($datos);
     return $datos;
   }
-
-  // Cargar los datos en variables
+  //cargo los datos en variables
   $name = validarRegistro($_POST['name']);
   $email = validarRegistro($_POST["email"]);
-  $password = validarRegistro($_POST['password']);
-  $confirmPassword = validarRegistro($_POST['confirmPassword']);
-
-  // Verifica si las contraseñas son iguales
-  if ($password === $confirmPassword) {
-    // Encripta la contraseña
-    $passcrypt = encryption($password);
-
-    // Inicia la consulta
-    $stmt = $mysqli->prepare("INSERT INTO `user` (`Name`, `email`, `pass`) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $email, $passcrypt);
-
-    // Ejecuta la consulta y da un resultado
-    if ($stmt->execute()) {
+  $pass = validarRegistro($_POST['pass']);
+  $confpass = validarRegistro($_POST['confirmPass']);
+  //verifica si las contraseñas coinciden
+  if ($pass === $confpass) {
+    //comienza la query
+    $passcrypt = encryption($pass);
+    $query = "INSERT INTO `user` (`ID_User`, `Name`, `email`, `pass`) 
+        VALUES (NULL, '$name', '$email', '$passcrypt');";
+    //carga el resultado en una variable
+    $resultado = $mysqli->query($query);
+    //si se crea correctamente te hace iniciar sesion
+    if ($resultado) {
       include("./loginApi.php");
-      $stmt->close();
+      $resultado->close();
       exit();
     } else {
-      header("Location: ../register.php?error=El correo ya está registrado o no cumple los requisitos");
+      header("Location: ../register.php?error=EL correo ya esta registrado o no cumple los requisitos");
       exit();
     }
   } else {
     header("Location: ../register.php?error=Las contraseñas no coinciden");
+    $resultado->close();
     exit();
   }
 }
-
-// Verifica qué campo está vacío y muestra un mensaje
-if (empty($_POST["email"])) {
-  header("Location: ../register.php?error=El correo es requerido");
+//verifica que campo esta vacio y muestra un mensaje
+if (empty($email)) {
+  header("Location:../register.php?error=El usuario es requerido");
   exit();
-} elseif (empty($_POST["password"])) {
-  header("Location: ../register.php?error=La contraseña es requerida");
+} elseif (empty($pass)) {
+  header("Location:../register.php?error=La contraseña es requerida");
   exit();
-} elseif (empty($_POST["name"])) {
-  header("Location: ../register.php?error=El nombre es requerido");
+} elseif (empty($name)) {
+  header("Location:../register.php?error=El nombre es requerida");
   exit();
 }
