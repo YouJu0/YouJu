@@ -1,4 +1,5 @@
 <?php
+
 // Establecer parámetros de la cookie de la sesión antes de iniciar la sesión
 $cookieParams = session_get_cookie_params();
 session_set_cookie_params([
