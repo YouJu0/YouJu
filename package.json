@@ -16,7 +16,7 @@
   "dependencies": {
     "express": "4.19.2",
     "flowbite": "^2.3.0",
-    "logger": "0.0.1",
+    "morgan": "1.10.0",
     "preline": "^2.3.0"
   }
 }
