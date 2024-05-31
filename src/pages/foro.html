@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foro</title>
+    <script type="module">
+      import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+      const socket = io();
+      const form = document.getElementById("form");
+      const input = document.getElementById("texto");
+      const menssages = document.getElementById("MSG");
+
+      socket.on("chat msg", (msg) => {
+        const item = "<li>" + msg + "</li>";
+        menssages.insertAdjacentHTML("beforeend", item);
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit("chat msg", input.value);
+          input.value = "";
+        }
+      });
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      *::after *::before {
+        box-sizing: border-box;
+      }
+      body {
+        display: grid;
+        place-content: center;
+        height: 100vh;
+        padding: 36px;
+        grid-template-rows: 1fr;
+        background-color: aquamarine;
+      }
+      #MSG {
+      }
+      #chat {
+        border: 1px solid black;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 350px;
+        height: 80vh;
+        position: relative;
+      }
+      #form {
+        bottom: 0;
+        display: flex;
+        height: 40px;
+        left: 0;
+        padding: 4px;
+        position: absolute;
+        right: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="chat">
+      <ul id="MSG"></ul>
+      <form id="form">
+        <input type="text" id="texto" />
+        <input type="submit" value="enviar" />
+      </form>
+    </section>
+  </body>
+</html>
