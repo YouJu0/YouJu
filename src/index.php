@@ -28,6 +28,7 @@ if (!isset($_SESSION['sesionMain'])) {
 <body>
   <header class="flex flex-row w-full h-12 bg-gray-100 justify-between items-center gap-4 px-10">
 
+    <a href="./scripts/index.js"> foro . putasadomicilio</a>
     <div class="column-one">
       <h2>YouJu</h2>
 
