@@ -1163,6 +1163,10 @@ input[type="range"]::-ms-fill-lower {
   display: table;
 }
 
+.grid {
+  display: grid;
+}
+
 .hidden {
   display: none;
 }
