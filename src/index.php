@@ -21,14 +21,14 @@ if (!isset($_SESSION['sesionMain'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./main.css">
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
   <title>YouJu | Inicio</title>
+
 </head>
 
 <body>
   <header class="flex flex-row w-full h-12 bg-gray-100 justify-between items-center gap-4 px-10">
 
-    <a href="./scripts/index.js"> foro . putasadomicilio</a>
+    <a href="http://localhost:3000/"> foro . putasadomicilio</a>
     <div class="column-one">
       <h2>YouJu</h2>
 
