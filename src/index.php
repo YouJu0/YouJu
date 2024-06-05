@@ -28,7 +28,7 @@ if (!isset($_SESSION['sesionMain'])) {
 <body>
   <header class="flex flex-row w-full h-12 bg-gray-100 justify-between items-center gap-4 px-10">
 
-    <a href="http://localhost:3000/"> foro . putasadomicilio</a>
+    <a href="http://localhost:3000/"> foro</a>
     <div class="column-one">
       <h2>YouJu</h2>
 

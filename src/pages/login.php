@@ -4,7 +4,6 @@ if (isset($_SESSION['sesionMain'])) {
   header("Location:../index.php");
   session_set_cookie_params(60 * 0.5);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
