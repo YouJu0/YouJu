@@ -4,6 +4,7 @@ session_start();
 include("../../conexion.php");
 include("../../tools/crypter.php");
 
+
 if (isset($_POST["email"]) && isset($_POST["pass"])) {
   function validarLogin($datos)
   {
@@ -37,7 +38,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
         exit();
       }
     } else {
-      header("Location:../login.php?errorEl usuario o la contraseña es incorrecto");
+      header("Location:../login.php?error=El usuario o la contraseña es incorrecto");
       $resultado->close();
       exit();
     }

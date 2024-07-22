@@ -26,8 +26,8 @@ if (
   if ($pass === $confpass) {
     //comienza la query
     $passcrypt = encryption($pass);
-    $query = "INSERT INTO `user` (`ID_User`, `Name`, `email`, `pass`) 
-        VALUES (NULL, '$name', '$email', '$passcrypt');";
+    $query = "INSERT INTO `user` (`ID_user`, `name`, `email`, `pass`) 
+      VALUES (NULL, '$name', '$email', '$passcrypt');";
     //carga el resultado en una variable
     $resultado = $mysqli->query($query);
     //si se crea correctamente te hace iniciar sesion
