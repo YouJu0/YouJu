@@ -6,13 +6,7 @@ if (!isset($_SESSION['sesionMain'])) {
 }
 
 ?>
-<?php
-// if (isset($_SESSION['sesionMain'])) {
 
-//   print_r('<div>' . $_SESSION['sesionMain']["nombre"] . '</div>');
-//   print_r('<div class="font-medium truncate">' . $_SESSION['sesionMain']["correo"] . '</div>');
-// } 
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,6 +52,13 @@ if (!isset($_SESSION['sesionMain'])) {
 
 
   </header>
+  <?php
+if (isset($_SESSION['sesionMain'])) {
+
+print_r('<div>' . $_SESSION['sesionMain']["nombre"] . '</div>');
+ print_r('<div class="font-medium truncate">' . $_SESSION['sesionMain']["correo"] . '</div>');
+ } 
+?>
   <div>
     <h1>Titulo</h1>
 
