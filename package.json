@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch ./src/scripts/index.js",
+    "start": "node ./src/scripts/index.js",
     "style": "npx tailwindcss -i ./input.css -o ./src/main.css --watch"
   },
   "author": "",

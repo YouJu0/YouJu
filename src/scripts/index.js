@@ -9,9 +9,12 @@ const sv = createServer(app);
 const io = new Server(sv, { connectionStateRecovery: {} });
 
 io.on('connection', (socket) => {
-  console.log("usuario conectado");
     socket.on("disconnect", () => {console.log("usuario desconectado");});
-  socket.on("chat msg", (msg) => {io.emit("chat msg", msg);});
+  socket.on("chat msg", (msg) => {
+    io.emit("chat msg", msg);  
+
+    var m = msg;
+  });
 });
 
 app.use(logger("dev"));

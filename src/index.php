@@ -54,9 +54,8 @@ if (!isset($_SESSION['sesionMain'])) {
   </header>
   <?php
 if (isset($_SESSION['sesionMain'])) {
-
-print_r('<div>' . $_SESSION['sesionMain']["nombre"] . '</div>');
- print_r('<div class="font-medium truncate">' . $_SESSION['sesionMain']["correo"] . '</div>');
+      print_r('<div>' . $_SESSION['sesionMain']["nombre"] . '</div>');
+      print_r('<div class="font-medium truncate">' . $_SESSION['sesionMain']["correo"] . '</div>');
  } 
 ?>
   <div>

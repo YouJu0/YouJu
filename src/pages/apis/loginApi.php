@@ -3,6 +3,7 @@ session_start();
 //para poder llamarlo
 include("../../conexion.php");
 include("../../tools/crypter.php");
+include("../apis/mailValidacion.php");
 
 
 if (isset($_POST["email"]) && isset($_POST["pass"])) {
@@ -27,7 +28,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
     if ($resultado->num_rows === 1) {
       $fila = $resultado->fetch_row();
       if ($fila[2] === $email && $fila[3] === $passcrypt) {
-        $datosSesion = array('id' => $fila[0], 'nombre' => $fila[1], 'correo' => $fila[2], 'password' => $fila[3], 'role' => $fila[4]);
+        $datosSesion = array('id' => $fila[0], 'nombre' => $fila[1], 'correo' => $fila[2], 'password' => $fila[3], 'date' => $fila[4]);
         $_SESSION['sesionMain'] = $datosSesion;
         header("Location:../../index.php");
         $resultado->close();
