@@ -6,14 +6,20 @@ import { Server } from "socket.io";
 const port = process.env.PORT ?? 3000;
 const app = express();
 const sv = createServer(app);
-const io = new Server(sv, { connectionStateRecovery: {} });
+const io = new Server(sv, {   connectionStateRecovery: {
+  // establece la duracion max para recuperacion de msg
+  maxDisconnectionDuration: 2 * 60 * 1000,
+  // se saltea si todo sale bien
+  skipMiddlewares: true,
+}});
 
 io.on('connection', (socket) => {
+  //muestra si el usuario se desconecto
     socket.on("disconnect", () => {console.log("usuario desconectado");});
-  socket.on("chat msg", (msg) => {
-    io.emit("chat msg", msg);  
-
-    var m = msg;
+  //manda los msg a todos los usuarios
+     socket.on("chat msg", (msg) => {
+      io.emit("chat msg", msg);  
+      var m = msg;
   });
 });
 
