@@ -2,5 +2,5 @@
 $hostN = 'localhost';
 $UserName = 'root';
 $UserPass = '';
-$DBname = 'YouJu';
+$DBname = 'cuentas';
 $mysqli =  new mysqli($hostN, $UserName, $UserPass, $DBname);
