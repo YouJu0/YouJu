@@ -1,5 +1,4 @@
 <?php
-function guardarMSG(){
 include("../../conexion.php");
 //compruebo si tiene sesion
 if (isset($_SESSION['sesionMain'])) {
@@ -17,22 +16,14 @@ if (isset($_SESSION['sesionMain'])) {
    
             header("Location: http://localhost:3000/");
         }catch (\Throwable $th) {
-            header("Location: ../register.php?error=Algo pase al guardar los msg");}}
+            header("Location: ../register.php?error=Algo pase al guardar los msg");}
 ?>
 
 <script>
-     //guardo los msg en una variable 
-     $var_MSG = document.writeln(m); // igualar el valor de la variable JavaScript a PHP 
-     setInterval(guardarMSG(), 120000)
-
-fetch('https://api.example.com/data')
-    .then(response => response.json())  // Convierte la respuesta en JSON
-    .then(data => {
-        console.log(data);  // Manejar los datos
-    })
-    .catch(error => {
-        console.error('Error:', error);  // Manejar errores
-    });
+     // igualar el valor de la variable JavaScript a PHP  
+     $var_MSG = document.writeln(m); 
+     //seteo un timer
+     setInterval(guardarMSG(), 120000);
 </script>
 
 
