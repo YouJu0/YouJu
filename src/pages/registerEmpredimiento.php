@@ -49,7 +49,7 @@ if (isset($_SESSION['sesionMain'])) {
 
     <!-- -->
     <label for="">numero de contacto :</label>
-    <input type="text" name="numeroDeContacto" id="numeroDeContacto" placeholder="ingrese su numero de contacto" required>
+    <input type="int" name="numeroDeContacto" id="numeroDeContacto" placeholder="ingrese su numero de contacto" required>
     <!-- -->
     
     <label for="">Describe tu empredimiento :</label>
