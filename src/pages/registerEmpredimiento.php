@@ -15,7 +15,7 @@ if (isset($_SESSION['sesionMain'])) {
 </head>
 
 <body>
-  <form action="./apis/registerApi.php" method="POST">
+  <form action="./apis/regsEmpredimiento.php" method="POST">
     <h1> Registrar empredimiento</h1>
     <hr>
     <?php
@@ -33,11 +33,11 @@ if (isset($_SESSION['sesionMain'])) {
     
     <!-- nombre -->
     <label for="">Nombre emprendedor :</label>
-    <input type="text" name="name" placeholder="Ingrese su nombre" required>
+    <input type="text" name="nombre" placeholder="Ingrese su nombre" required>
     
     <!-- nombre empredimiento -->
     <label for="">Nombre emprendimiento :</label>
-    <input type="text" name="name" placeholder="Ingrese el nombre del empredimiento" required>
+    <input type="text" name="nombreEmprendimiento" id="NombreEmprendimiento" placeholder="Ingrese el nombre del empredimiento" required>
     
     <!-- categoria -->
     <label for="">categoria :</label>
@@ -49,21 +49,21 @@ if (isset($_SESSION['sesionMain'])) {
 
     <!-- -->
     <label for="">numero de contacto :</label>
-    <input type="text" name="confirmPass" placeholder="ingrese su numero de contacto" required>
+    <input type="text" name="numeroDeContacto" id="numeroDeContacto" placeholder="ingrese su numero de contacto" required>
     <!-- -->
     
     <label for="">Describe tu empredimiento :</label>
-    <input type="text" name="descripcionDeEmprendimiento" id="fecha_nacimiento">
+    <input type="text" name="descripcionDeEmprendimiento" id="descripcionDeEmprendimiento" required>
 
     <!-- -->
     
     <label for="">puedes poner dos redes sociales (opcional):</label>
     <input type="text" name="redSocial1" id="redSocial1">
-    <input type="text" name="redSocial1" id="redSocial1">
+    <input type="text" name="redSocial2" id="redSocial2">
     <!-- -->
     
     <label for=""> ubicacion (opcional):</label>
-    <input type="text" name="redSocial1" id="redSocial1">
+    <input type="text" name="ubicacion" id="ubicacion">
 
 
 
