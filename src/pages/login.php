@@ -5,6 +5,11 @@ if (isset($_SESSION['sesionMain'])) {
   session_set_cookie_params(60 * 0.5);
 }
 ?>
+<script>
+  
+localStorage.setItem("user"= $_SESSION["sesionMain"]["nombre"]);
+
+</script>
 <!DOCTYPE html>
 <html lang="en">
 

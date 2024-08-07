@@ -28,7 +28,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
     if ($resultado->num_rows === 1) {
       $fila = $resultado->fetch_row();
       if ($fila[2] === $email && $fila[3] === $passcrypt) {
-        $datosSesion = array('id' => $fila[0], 'nombre' => $fila[1], 'correo' => $fila[2], 'password' => $fila[3], 'date' => $fila[4]);
+        $datosSesion = array('nombre' => $fila[1], 'correo' => $fila[2]);
         $_SESSION['sesionMain'] = $datosSesion;
         header("Location:../../index.php");
         $resultado->close();

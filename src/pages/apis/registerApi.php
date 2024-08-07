@@ -70,14 +70,14 @@ if (rangoEdad($fecha)) {
       exit();
     }
   } else {
-    header("Location: ../register.php?error=el codigo es incorrecto");
-    $resultado->close();
+    
+    header("Location: ../register.php?error=la contraseña no coincide");
     exit();
   }
-}
 }else{
   //de no ser mayor muestra el msg
   header("Location: ../register.php?error=Debe ser mayor de edad");
+}
 }
 //}
 //function para validar mayoria de edad
@@ -88,6 +88,10 @@ function rangoEdad ($fecha)
     //Creamos objeto fecha desde los valores recibidos
     $nacio = DateTime::createFromFormat('Y-m-d', $fecha);
     //Calculamos usando diff y la fecha actual
+
+//posible error al poner una año mal
+
+
     $calculo = $nacio->diff(new DateTime());
     //Obtenemos la edad
     $edad = $calculo->y;    

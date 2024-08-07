@@ -3,8 +3,9 @@ include_once('./tools/sessionConfig.php');
 if (!isset($_SESSION['sesionMain'])) {
   //si no esta seteada te manda para login
   header("Location: ./pages/login.php");
+}else{
+setcookie("user",$_SESSION['sesionMain']["nombre"], time() +9000);
 }
-
 ?>
 
 <!DOCTYPE html>
