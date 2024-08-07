@@ -1,7 +1,12 @@
 <?php
 include_once('./tools/sessionConfig.php');
-$sessionExist = isset($_SESSION['sesionMain']);
+if (!isset($_SESSION['sesionMain'])) {
+  //si no esta seteada te manda para login
+  header("Location: ./pages/login.php");
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

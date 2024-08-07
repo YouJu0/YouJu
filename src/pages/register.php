@@ -38,9 +38,14 @@ if (isset($_SESSION['sesionMain'])) {
     <input type="text" name="pass" placeholder="Ingrese su contraseña" required>
     <label for="">Confirmar Contraseña :</label>
     <input type="text" name="confirmPass" placeholder="Vuelva a ingresar su contraseña" required>
-    <input type="date" name="" id="">
-    <button type="submit">Registrarse</button>
+    <label for="">ingrese su fecha de nacimiento :</label>
+    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+
+    <br>
+    <button type="submit">enviar</button>
+    <br>
     <a href="./login.php">ingresar</a>
+  
   </form>
 </body>
 

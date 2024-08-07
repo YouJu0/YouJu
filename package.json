@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch ./src/scripts/index.js",
+    "start": "node ./src/scripts/index.js",
     "style": "npx tailwindcss -i ./input.css -o ./src/main.css --watch"
   },
   "author": "",
@@ -12,7 +13,7 @@
   "description": "",
   "devDependencies": {
     "tailwindcss": "^3.4.3"
-  },
+  }, 
   "dependencies": {
     "express": "4.19.2",
     "flowbite": "^2.3.0",
