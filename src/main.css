@@ -644,8 +644,20 @@ video {
   top: 100%;
 }
 
+.left-0 {
+  left: 0px;
+}
+
+.top-\[calc\(100vh-3\.5rem\)\] {
+  top: calc(100vh - 3.5rem);
+}
+
 .z-\[-1\] {
   z-index: -1;
+}
+
+.z-\[1\] {
+  z-index: 1;
 }
 
 .z-\[999\] {
@@ -669,6 +681,11 @@ video {
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-1 {
@@ -831,6 +848,10 @@ video {
 }
 
 .w-screen {
+  width: 100vw;
+}
+
+.w-\[100vw\] {
   width: 100vw;
 }
 

@@ -13,12 +13,13 @@
   "description": "",
   "devDependencies": {
     "tailwindcss": "^3.4.3"
-  }, 
+  },
   "dependencies": {
     "express": "4.19.2",
     "flowbite": "^2.3.0",
     "morgan": "1.10.0",
     "preline": "^2.4.0",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "swiper": "^11.1.9"
   }
 }
