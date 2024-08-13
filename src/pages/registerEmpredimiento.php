@@ -1,7 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION['sesionMain'])) {
-  header("Location:../index.php");
+
+
+
 }
 ?>
 <!DOCTYPE html>
@@ -15,7 +17,7 @@ if (isset($_SESSION['sesionMain'])) {
 </head>
 
 <body>
-  <form action="./apis/regsEmpredimiento.php" method="POST">
+  <form action="./apis/regsEmpredimientoApi.php" method="POST">
     <h1> Registrar empredimiento</h1>
     <hr>
     <?php
@@ -34,36 +36,39 @@ if (isset($_SESSION['sesionMain'])) {
     <!-- nombre -->
     <label for="">Nombre emprendedor :</label>
     <input type="text" name="nombre" placeholder="Ingrese su nombre" required>
+    <br>
     
     <!-- nombre empredimiento -->
     <label for="">Nombre emprendimiento :</label>
-    <input type="text" name="nombreEmprendimiento" id="NombreEmprendimiento" placeholder="Ingrese el nombre del empredimiento" required>
-    
+    <input type="text" name="nombreEmprendimiento" placeholder="Ingrese el nombre del empredimiento" required>
+    <br>
     <!-- categoria -->
     <label for="">categoria :</label>
-    <select name="categorias" id="categorias" required>
-    <option value="">servicios</option>
-    <option value="">manualidades</option>
-    <option value="">artes culinarias</option>
+    <select name="categorias"  required>
+    <option value="1">servicios</option>
+    <option value="2">manualidades</option>
+    <option value="3">artes culinarias</option>
     </select>
-
+    <br>
     <!-- -->
+
     <label for="">numero de contacto :</label>
     <input type="int" name="numeroDeContacto" id="numeroDeContacto" placeholder="ingrese su numero de contacto" required>
+    <br>
     <!-- -->
     
     <label for="">Describe tu empredimiento :</label>
     <input type="text" name="descripcionDeEmprendimiento" id="descripcionDeEmprendimiento" required>
-
+    <br>
     <!-- -->
-    
     <label for="">puedes poner dos redes sociales (opcional):</label>
-    <input type="text" name="redSocial1" id="redSocial1">
-    <input type="text" name="redSocial2" id="redSocial2">
+    <input type="text" name="redSocial1">
+    <input type="text" name="redSocial2">
+    <br>
     <!-- -->
     
     <label for=""> ubicacion (opcional):</label>
-    <input type="text" name="ubicacion" id="ubicacion">
+    <input type="text" name="ubicacion">
 
 
 

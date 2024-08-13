@@ -2,6 +2,8 @@
 $hostN = 'localhost';
 $UserName = 'root';
 $UserPass = '';
-$DBname = 'YouJu';
+$DBname = 'youju';
 $mysqli =  new mysqli($hostN, $UserName, $UserPass, $DBname);
-if ($mysqli->connect_errno) {die(''. $mysqli->connect_error);}
+if ($mysqli->connect_errno) {
+    die('algo fallo'. $mysqli->connect_error);
+}

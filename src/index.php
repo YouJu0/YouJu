@@ -2,9 +2,7 @@
 include_once('./tools/sessionConfig.php');
 if (!isset($_SESSION['sesionMain'])) {
   //si no esta seteada te manda para login
-  header("Location: ./pages/login.php");
-}else{
-setcookie("user",$_SESSION['sesionMain']["nombre"], time() +9000);
+    header("Location: ./pages/login.php");
 }
 ?>
 
@@ -23,13 +21,40 @@ setcookie("user",$_SESSION['sesionMain']["nombre"], time() +9000);
 <body>
   <header class="flex flex-row w-full h-12 bg-gray-100 justify-between items-center gap-4 px-10">
 
-    <a href="http://localhost:3000/"> foro</a>
+    <a href="http://localhost:3000/"> [ - foro - ]</a>
+
+<?php
+
+    if(isset($_SESSION['datosEmprendimiento'])){
+      $nombreEmprendimiento = $_SESSION['datosEmprendimiento']['nombreEmprendimiento'];
+      $valido = $_SESSION['datosEmprendimiento']['validacionEmprendimiento'];
+        if($valido == 1){
+          echo "<a href='./emprendimiento.php'>[ - Tu emprendimiento '$nombreEmprendimiento' - ]</a>";
+        }else{
+          echo "<a href='./pages/registerEmpredimiento.php'>[ - esperandon - ]</a>";
+        }
+    
+      }else{
+  echo "<a href='./pages/registerEmpredimiento.php'>[ - registrar emprendimiento - ]</a>";
+}
+?>
     <div class="column-one">
       <h2>YouJu</h2>
 
     </div>
 
-
+<!-- solo para mostrar un unico error, por si falla la conexion -->
+<?php
+    if (isset($_GET['error'])) {
+    ?>
+      <p class="error">
+        <?php
+        echo $_GET['error']
+        ?>
+      </p>
+    <?php
+    }
+    ?>
     <div class="column-two">
       <div id="autocomplete"></div>
       <div class="hs-dropdown relative inline-flex">
