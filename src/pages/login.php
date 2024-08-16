@@ -39,7 +39,7 @@ localStorage.setItem("user"= $_SESSION["sesionMain"]["nombre"]);
     <label for="">Email: </label>
     <input type="email" name="email" placeholder="Ingrese su correo electronico">
     <label for="">Contraseña: </label>
-    <input type="text" name="pass" placeholder="Ingrese su contraseña" required>
+    <input type="password" name="pass" placeholder="Ingrese su contraseña" required>
     <br>
     <button type="submit">[ -Iniciar sesion- ]</button>
     <a href="./register.php">[ -Registrarse- ]</a>

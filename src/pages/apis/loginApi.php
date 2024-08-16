@@ -73,7 +73,7 @@ function sessionEmprendimiento($fila,$mysqli,$result1){
 };
 //funcion para logear
 function logear($fila,$resultado){
-  $datosSesion = array('nombre' => $fila[1], 'correo' => $fila[4],'Lista_N' => $fila[6],'Id_rango' => $fila[7],'User_Valido' => $fila[8]);
+  $datosSesion = array('id'=> $fila[0],'nombre' => $fila[1],'apellido' => $fila[2], 'correo' => $fila[4],'Lista_N' => $fila[6],'Id_rango' => $fila[7],'User_Valido' => $fila[8]);
   $_SESSION['sesionMain'] = $datosSesion;
   setcookie("user",$_SESSION['sesionMain']["nombre"], time() +9000);
   header("Location:../../index.php");

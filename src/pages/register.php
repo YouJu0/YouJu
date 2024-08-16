@@ -44,11 +44,11 @@ if (isset($_SESSION['sesionMain'])) {
     <br>
     <!-- -->
     <label for="">Contraseña :</label>
-    <input type="text" name="pass" placeholder="Ingrese su contraseña" required>
+    <input type="password" name="pass" placeholder="Ingrese su contraseña" required>
     <br>
     <!-- -->
     <label for="">Confirmar Contraseña :</label>
-    <input type="text" name="confirmPass" placeholder="Vuelva a ingresar su contraseña" required>
+    <input type="password" name="confirmPass" placeholder="Vuelva a ingresar su contraseña" required>
     <br>
     <!-- -->
     <label for="">ingrese su fecha de nacimiento :</label>
