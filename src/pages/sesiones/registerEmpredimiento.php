@@ -17,7 +17,7 @@ if (isset($_SESSION['sesionMain'])) {
 </head>
 
 <body>
-  <form action="./apis/regsEmpredimientoApi.php" method="POST">
+  <form action="../apis/regsEmpredimientoApi.php" method="POST">
     <h1> Registrar empredimiento</h1>
     <hr>
     <?php

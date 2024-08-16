@@ -31,7 +31,7 @@ if (
                 //carga el resultado en una variable  
                 $resultado = $mysqli->query($query);
               }catch (\Throwable $th) {
-                header("Location: ../register.php?error=EL correo ya esta registrado o algo a ido mal");
+                header("Location: ../sesiones/register.php?error=EL correo ya esta registrado o algo a ido mal");
                 //Cierro la consulta y la conexion
                 exit();
               }//verifico que la consulta se haga correctamente

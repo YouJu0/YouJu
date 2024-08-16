@@ -17,7 +17,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
           $fila = $resultado->fetch_row();
         //en caso de ser admin te manda al panel admin
       if ($resultado->num_rows === 1 && $fila[7] == 3) {
-          header("Location:../panelAdmin.php");
+          header("Location:../../panelAdmin.php");
           CloseALL($resultado);
         } //compruebo si hay resultados
       if ($resultado->num_rows === 1 && $fila[7] == 1) {
@@ -26,25 +26,25 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
           sessionEmprendimiento($fila,$mysqli,$resultado);
         }//de estar en la lista negra se les avisa
         elseif ($fila[6]==1) {
-          header("Location:../login.php?error=Ese usuario a sido 
+          header("Location:../sesiones/login.php?error=Ese usuario a sido 
           baneado permanentemente no intente registrarse nuevamente.");
           
           CloseALL($resultado);
         }//si no es valido le aviso 
         else{
-          header("Location:../login.php?error=Su cuenta debe ser validada, dirijase a la oficina de la juventud, ubicada en el parque");
+          header("Location:../sesiones/login.php?error=Su cuenta debe ser validada, dirijase a la oficina de la juventud, ubicada en el parque");
           CloseALL($resultado);
         }//fin de condiciones
 
         }//si no se encuentra su usuario le aviso
         else {
           //fallo principal, no se encontro los datos en la base de datos
-          header("Location:../login.php?error=Compruebe usuario y contraseña");
+          header("Location:../sesiones/login.php?error=Compruebe usuario y contraseña");
           CloseALL($resultado);
         }//fin de condiciones
       }//si no esta seteado le aviso
       else {
-      header("Location:../login.php?error=Los campos son requeridos");
+      header("Location:../sesiones/login.php?error=Los campos son requeridos");
       exit();
     }//fin de condiciones
 

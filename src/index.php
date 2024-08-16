@@ -2,7 +2,7 @@
 include_once('./tools/sessionConfig.php');
 if (!isset($_SESSION['sesionMain'])) {
   //si no esta seteada te manda para login
-    header("Location: ./pages/login.php");
+    header("Location: ./pages/sesiones/login.php");
 }
 ?>
 
@@ -21,21 +21,20 @@ if (!isset($_SESSION['sesionMain'])) {
 <body>
   <header class="flex flex-row w-full h-12 bg-gray-100 justify-between items-center gap-4 px-10">
 
-    <a href="./pages/ForoPrueba.php"> [ - foro - ]</a>
+    <a href="./pages/chat/chat.php"> [ - foro - ]</a>
 
 <?php
-
     if(isset($_SESSION['datosEmprendimiento'])){
       $nombreEmprendimiento = $_SESSION['datosEmprendimiento']['nombreEmprendimiento'];
       $valido = $_SESSION['datosEmprendimiento']['validacionEmprendimiento'];
         if($valido == 1){
           echo "<a href='./emprendimiento.php'>[ - Tu emprendimiento '$nombreEmprendimiento' - ]</a>";
         }else{
-          echo "<a href='./pages/registerEmpredimiento.php'>[ - esperandon - ]</a>";
+          echo "<a href='./pages/sesiones/registerEmprendimiento.php'>[ - esperando verifiacion - ]</a>";
         }
     
       }else{
-  echo "<a href='./pages/registerEmpredimiento.php'>[ - registrar emprendimiento - ]</a>";
+  echo "<a href='./pages/sesiones/registerEmprendimiento.php'>[ - registrar emprendimiento - ]</a>";
 }
 ?>
     <div class="column-one">
