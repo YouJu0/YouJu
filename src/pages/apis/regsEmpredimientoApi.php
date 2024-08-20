@@ -5,14 +5,13 @@ include("../../conexion.php");
 include("../../tools/crypter.php");
 //verifica si los campos no estan vacios
 if (
-  isset($_POST["nombre"])
-  && isset($_POST["nombreEmprendimiento"])
+  isset($_POST["nombreEmprendimiento"])
   && isset($_POST["categorias"])
   && isset($_POST["numeroDeContacto"])
   && isset($_POST["descripcionDeEmprendimiento"])
   ){
     //cargo los datos en variables
-    $nombre = validarRegistro($_POST["nombre"]);
+    $nombre = $_SESSION['sesionMain']["nombre"];
     $nombreEmprendimiento = validarRegistro($_POST["nombreEmprendimiento"]);
     $categoria = validarRegistro($_POST["categorias"]);
     $numContacto = validarRegistro($_POST['numeroDeContacto']);
