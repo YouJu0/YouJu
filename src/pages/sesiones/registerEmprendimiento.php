@@ -33,11 +33,6 @@ if (isset($_SESSION['sesionMain'])) {
     ?>
     <hr>
     
-    <!-- nombre -->
-    <label for="">Nombre emprendedor :</label>
-    <input type="text" name="nombre" placeholder="Ingrese su nombre" required>
-    <br>
-    
     <!-- nombre empredimiento -->
     <label for="">Nombre emprendimiento :</label>
     <input type="text" name="nombreEmprendimiento" placeholder="Ingrese el nombre del empredimiento" required>

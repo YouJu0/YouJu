@@ -1,19 +1,21 @@
 <?php
-session_start(); // Inicia la sesión para usar las variables de sesión
-
-include("../../conexion.php"); // Incluye el archivo de conexión a la base de datos
+ // Inicia la sesión para usar las variables de sesión
+session_start();
+// Incluye el archivo de conexión a la base de datos
+include("../../conexion.php"); 
 
 // Consulta para obtener los mensajes, ordenados por fecha descendente
-$query = "SELECT `Mensaje`, `Fecha_mensajes`, `Id_Usuario` FROM `mensajes` ORDER BY `Fecha_mensajes` DESC";
-$result = mysqli_query($mysqli, $query); // Ejecuta la consulta
+$query = "SELECT `Mensaje`, `Fecha_mensajes`, `Id_Usuario` FROM `mensajes` ORDER BY `Fecha_mensajes` ASC";
+// Ejecuta la consulta
+$result = mysqli_query($mysqli, $query); 
 
 if (!$result) {
-    // Si hay un error en la consulta, devuelve un mensaje de error en formato JSON
+    // Si hay un error en la consulta, devuelve un mensaje de error en formato Json
     echo json_encode(["error" => "Error al obtener los mensajes: " . mysqli_error($mysqli)]);
-    exit(); // Termina el script si hay un error
+    exit(); 
 }
-
-$messages = []; // Array para almacenar los mensajes
+ // Array para almacenar los mensajes
+$messages = [];
 
 while ($row = mysqli_fetch_assoc($result)) {
     // Consulta para obtener el nombre del usuario a partir de su ID
@@ -30,7 +32,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         $username = "Desconocido";
     }
 
-    // Añade el mensaje al array de mensajes
+    // suma el mensaje al array de mensajes
     $messages[] = [
         'username' => $username,
         'message' => htmlspecialchars($row['Mensaje']),
@@ -40,4 +42,4 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // Devuelve los mensajes en formato JSON
 echo json_encode($messages);
-?>
+
