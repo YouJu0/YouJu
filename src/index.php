@@ -1,9 +1,9 @@
 <?php
 include_once('./tools/sessionConfig.php');
-// if (!isset($_SESSION['sesionMain'])) {
-//   header("Location: ./pages/login.php");
-//   exit();
-// }
+if (!isset($_SESSION['sesionMain'])) {
+  //si no esta seteada te manda para login
+  header("Location: ./pages/sesiones/login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,13 +14,13 @@ include_once('./tools/sessionConfig.php');
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./main.css">
   <link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.min.css">
-  
+
   <title>YouJu | Inicio</title>
   <style>
-      html {
+    html {
       scroll-behavior: smooth;
     }
-    
+
     .swiper-container {
       display: flex;
       justify-content: center;
@@ -28,7 +28,8 @@ include_once('./tools/sessionConfig.php');
       margin-inline: auto;
       height: 40vh;
       overflow: hidden;
-      position: relative; /* Necesario para que las flechas se posicionen correctamente */
+      position: relative;
+      /* Necesario para que las flechas se posicionen correctamente */
     }
 
     .swiper-slide {
@@ -63,11 +64,13 @@ include_once('./tools/sessionConfig.php');
     }
 
     .swiper-button-prev {
-      left: 20px; /* Ajusta la distancia desde el carrusel */
+      left: 20px;
+      /* Ajusta la distancia desde el carrusel */
     }
 
     .swiper-button-next {
-      right: 20px; /* Ajusta la distancia desde el carrusel */
+      right: 20px;
+      /* Ajusta la distancia desde el carrusel */
     }
 
     #services {
@@ -139,7 +142,7 @@ include_once('./tools/sessionConfig.php');
       </div>
       <img src="./assets/logo.png" class="h-80 -rotate-[16deg]" alt="">
     </section>
-   
+
     <section id="services" class="flex justify-center items-center h-[calc(100vh+0.56rem)] w-[100vw]">
       <img src="./assets/backgrounds/second.png" alt="bg" class="absolute top-[calc(100vh-3.5rem)] left-0 w-full h-full z-[1]">
       <div class="swiper-container">
@@ -194,7 +197,7 @@ include_once('./tools/sessionConfig.php');
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-      
+
     });
   </script>
 </body>
