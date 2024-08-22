@@ -1,7 +1,7 @@
 <?php
 include_once('./tools/sessionConfig.php');
 if (!isset($_SESSION['sesionMain'])) {
-  //si no esta seteada te manda para login
+  //si no está seteada te manda para login
   header("Location: ./pages/sesiones/login.php");
 }
 ?>
@@ -14,6 +14,7 @@ if (!isset($_SESSION['sesionMain'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./main.css">
   <link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../node_modules/preline/dist/preline.css">
 
   <title>YouJu | Inicio</title>
   <style>
@@ -29,7 +30,6 @@ if (!isset($_SESSION['sesionMain'])) {
       height: 40vh;
       overflow: hidden;
       position: relative;
-      /* Necesario para que las flechas se posicionen correctamente */
     }
 
     .swiper-slide {
@@ -65,12 +65,10 @@ if (!isset($_SESSION['sesionMain'])) {
 
     .swiper-button-prev {
       left: 20px;
-      /* Ajusta la distancia desde el carrusel */
     }
 
     .swiper-button-next {
       right: 20px;
-      /* Ajusta la distancia desde el carrusel */
     }
 
     #services {
@@ -84,7 +82,24 @@ if (!isset($_SESSION['sesionMain'])) {
 
   <header class="flex flex-row fixed z-[999] h-9 bg-[#A7DE72] py-5 items-center justify-between px-2 top-0 w-full">
     <div class="flex items-center h-full flex-row gap-4 justify-center">
-      <button class="flex items-center h-full"><img src="assets/menu.svg" class="h-5" alt=""></button>
+      <!-- Menú desplegable de izquierda a derecha -->
+      <div class="hs-dropdown relative inline-flex">
+        <button id="hs-menu-trigger" type="button" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm font-semibold">
+          <img src="assets/menu.svg" class="h-5" alt="">
+        </button>
+        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[200px] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-menu-trigger">
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
+            Inicio
+          </a>
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
+            Servicios
+          </a>
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
+            Contacto
+          </a>
+        </div>
+      </div>
+
       <a href="/"><img src="assets/logo.png" class="flex h-8" alt=""></a>
     </div>
     <div class="flex items-center h-full flex-row gap-4 justify-center">
@@ -95,34 +110,20 @@ if (!isset($_SESSION['sesionMain'])) {
             <?php echo isset($_SESSION['sesionMain']) ? $_SESSION['sesionMain']['nombre'] : ''; ?>
           </span>
         </button>
-        <div class="hs-dropdown relative inline-flex">
-          <a id="hs-dropdown-default" type="button" class="hs-dropdown-toggle">
-            <img src="./assets/login.svg" class="h-11" alt="">
+        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-dropdown-custom-trigger">
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
+            Configuración
           </a>
-          <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" aria-labelledby="hs-dropdown-default">
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
-              Tu cuenta
-            </a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
-              Notificaciones
-            </a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/apis/sessionClose.php">
-              Cerrar sesión
-            </a>
-          </div>
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
+            Mi Perfil
+          </a>
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/apis/sessionClose.php">
+            Cerrar sesión
+          </a>
         </div>
       </div>
     </div>
   </header>
-
-  <script>
-    document.getElementById('start-button').addEventListener('click', function(event) {
-      event.preventDefault();
-      document.getElementById('services').scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  </script>
 
   <main class="container">
     <section id="welcome" class="flex flex-row justify-between items-center h-[calc(100vh-3.5rem)]">
@@ -182,6 +183,7 @@ if (!isset($_SESSION['sesionMain'])) {
 
   <!-- Scripts -->
   <script src="../node_modules/swiper/swiper-bundle.min.js"></script>
+  <script src="../node_modules/preline/dist/preline.js"></script>
   <script>
     var swiper = new Swiper(".swiper-container", {
       slidesPerView: 1.7,
@@ -197,7 +199,6 @@ if (!isset($_SESSION['sesionMain'])) {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-
     });
   </script>
 </body>
