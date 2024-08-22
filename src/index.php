@@ -99,6 +99,7 @@ if (!isset($_SESSION['sesionMain'])) {
           </a>
         </div>
       </div>
+      <a href="./pages/chat/chat.php">Foro</a>
 
       <a href="/"><img src="assets/logo.png" class="flex h-8" alt=""></a>
     </div>
@@ -123,6 +124,7 @@ if (!isset($_SESSION['sesionMain'])) {
         </div>
       </div>
     </div>
+
   </header>
 
   <main class="container">
