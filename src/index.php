@@ -86,6 +86,7 @@ if (!isset($_SESSION['sesionMain'])) {
     <div class="flex items-center h-full flex-row gap-4 justify-center">
       <button class="flex items-center h-full"><img src="assets/menu.svg" class="h-5" alt=""></button>
       <a href="/"><img src="assets/logo.png" class="flex h-8" alt=""></a>
+      <a href="./pages/chat/chat.php">dawdawd</a>
     </div>
     <div class="flex items-center h-full flex-row gap-4 justify-center">
       <div class="hs-dropdown relative inline-flex">
