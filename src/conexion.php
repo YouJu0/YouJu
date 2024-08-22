@@ -1,7 +1,7 @@
 <?php
-$hostN = 'utuserver.duckdns.org:3306';
-$UserName = 'utu';
-$UserPass = 'utu2023';
+$hostN = 'localhost';
+$UserName = 'root';
+$UserPass = '';
 $DBname = 'youju';
 $mysqli =  new mysqli($hostN, $UserName, $UserPass, $DBname);
 if ($mysqli->connect_errno) {
