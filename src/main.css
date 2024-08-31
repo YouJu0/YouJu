@@ -748,10 +748,6 @@ video {
   height: 2rem;
 }
 
-.h-11 {
-  height: 2.75rem;
-}
-
 .h-2 {
   height: 0.5rem;
 }
@@ -794,6 +790,18 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-24 {
+  height: 6rem;
+}
+
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-\[10000px\] {
+  height: 10000px;
 }
 
 .w-10 {
@@ -1205,56 +1213,6 @@ video {
 
 .duration-500 {
   transition-duration: 500ms;
-}
-
-.before\:absolute::before {
-  content: var(--tw-content);
-  position: absolute;
-}
-
-.before\:-top-4::before {
-  content: var(--tw-content);
-  top: -1rem;
-}
-
-.before\:start-0::before {
-  content: var(--tw-content);
-  inset-inline-start: 0px;
-}
-
-.before\:h-4::before {
-  content: var(--tw-content);
-  height: 1rem;
-}
-
-.before\:w-full::before {
-  content: var(--tw-content);
-  width: 100%;
-}
-
-.after\:absolute::after {
-  content: var(--tw-content);
-  position: absolute;
-}
-
-.after\:-bottom-4::after {
-  content: var(--tw-content);
-  bottom: -1rem;
-}
-
-.after\:start-0::after {
-  content: var(--tw-content);
-  inset-inline-start: 0px;
-}
-
-.after\:h-4::after {
-  content: var(--tw-content);
-  height: 1rem;
-}
-
-.after\:w-full::after {
-  content: var(--tw-content);
-  width: 100%;
 }
 
 .hover\:bg-blue-700:hover {
