@@ -52,7 +52,7 @@ if (!isset($_SESSION['sesionMain'])) {
     if (forumIdInput.value == 0) {
         forumIdInput.value = 1;
     }
-
+    loadMessages();
     // Función para cargar los mensajes del foro seleccionado
     function loadMessages() {
         const forumId = forumIdInput.value;
@@ -83,7 +83,7 @@ if (!isset($_SESSION['sesionMain'])) {
             .catch(error => console.error('Error al cargar los mensajes:', error));
     }
 
-    loadMessages();
+
     
     // Cambiar de foro
     forumSelect.addEventListener('change', function() {
