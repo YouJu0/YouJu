@@ -42,18 +42,18 @@ if (
         exit();
       } //si la consulta falla se lo aviso con dos posibilidades
       else {
-        header("Location: ../register.php?error=EL correo ya esta registrado o no cumple los requisitos");
+        header("Location: ../sesiones/register.php?error=EL correo ya esta registrado o no cumple los requisitos");
         exit();
       } //fin de condicion
     } //si la contraseña y la confirmacion de contraseñan no coinciden se lo aviso
     else {
-      header("Location: ../register.php?error=las contraseñas no coinciden");
+      header("Location: ../sesiones/register.php?error=las contraseñas no coinciden");
       exit();
     } //fin de condicion
   } //Si esta por fuera de rango de edad se le inpide el registro
   else {
     //de no ser mayor muestra el msg
-    header("Location: ../register.php?error=Debe de tener entre 14 y 29 años para registrarse");
+    header("Location: ../sesiones/register.php?error=Debe de tener entre 14 y 29 años para registrarse");
   } //fin de condicion
 } //fin de condicion
 

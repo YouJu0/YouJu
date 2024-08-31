@@ -32,23 +32,28 @@ if (isset($_SESSION['sesionMain'])) {
     <hr>
   <!-- -->
     <label for="">Nombre :</label>
-    <input type="text" name="nombre" placeholder="Ingrese su nombre" required>
+    <input type="text" name="nombre" placeholder="Ingrese su nombre" required
+    pattern="[A-Za-zñÑ]">
     <br>
     <!-- -->
     <label for="">apellido :</label>
-    <input type="text" name="apellido" placeholder="Ingrese su apellido" required>
+    <input type="text" name="apellido" placeholder="Ingrese su apellido" required
+    pattern="[A-Za-zñÑ]">
     <br>
     <!-- -->
     <label for="">Email :</label>
-    <input type="email" name="email" placeholder="Ingrese su correo electronico" pattern=".+@.*\..*" required>
+    <input type="email" name="email" placeholder="Ingrese su correo electronico" 
+    pattern=".+@.*\..*" required>
     <br>
     <!-- -->
     <label for="">Contraseña :</label>
-    <input type="password" name="pass" placeholder="Ingrese su contraseña" required>
+    <input type="password" name="pass" placeholder="Ingrese su contraseña" required
+    pattern="[A-Za-zñÑ]">
     <br>
     <!-- -->
     <label for="">Confirmar Contraseña :</label>
-    <input type="password" name="confirmPass" placeholder="Vuelva a ingresar su contraseña" required>
+    <input type="password" name="confirmPass" placeholder="Vuelva a ingresar su contraseña" required
+    pattern="[A-Za-zñÑ]">
     <br>
     <!-- -->
     <label for="">ingrese su fecha de nacimiento :</label>

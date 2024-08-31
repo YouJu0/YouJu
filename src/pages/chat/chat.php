@@ -1,11 +1,10 @@
 <?php
-
-//compruebo la session y de no estar lo mando al login con un aviso
 session_start();
 if (!isset($_SESSION['sesionMain'])) {
-    header('Location: ../sesiones/login.php?error=para ingresar a los foros debe estar logeado');
-    exit();
-}
+    //si no está seteada te manda para login
+    header("Location: ../../index.php");
+
+  }
 ?>
 
 <!DOCTYPE html>
@@ -13,88 +12,116 @@ if (!isset($_SESSION['sesionMain'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chat</title>
-<!-- genero unos estilos simples para que sea cuadrado el chat-->
+    <title>Chat</title>
     <style>
-        body{ display: flex;flex-direction: column;height: 100vh;width: 100vw;align-items: center;
-            justify-content: center;}
+        body { display: flex; flex-direction: column; height: 100vh; width: 100vw; align-items: center; justify-content: center; }
         .chat-box { width: 400px; height: 300px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; }
         .message { margin-bottom: 15px; }
     </style>
 </head>
 <body>
-<!-- comienzo a darle forma al chat -->
     <h1>Chat en PHP</h1>
+    
+    <!-- Selección de Foro -->
+    <label for="forum-select">Selecciona un Foro:</label>
+    <select id="forum-select">
+    <option value="1" selected="true">ggeneral</option>
+    <option value="2">salud mental</option>
+    </select>
+    
     <div class="chat-box" id="chat-box">
-        <!-- Los mensajes se cargan aquí -->
+        <!-- Los mensajes se cargarán aquí -->
     </div>
-<!-- creo el foro con los inputs -->
+
     <form id="chat-form">
+        <input type="hidden" id="forum-id" name="forum-id" value="">
         <label for="message">Mensaje:</label>
         <input type="text" id="message" name="message" required>
         <button type="submit">Enviar</button>
     </form>
 
-    <!-- un enlace para volver al index -->
-    <a href="../../index.php">volver a la pagina principal</a>
-    <!-- genro un script que sube y trae los datos de la base de datos  -->
+    <a href="../../index.php">Volver a la página principal</a>
+
     <script>
-        //creo un fetch a al php que trae los mensajes
-        document.addEventListener('DOMContentLoaded', function() {
-            //funcion par apoder traer los mensajes mas facil
-            function loadMessages() {
-                fetch('./get_Msg.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        //inserto los mensajes con un formato de un div el nombre y el mensaje (esto se puede modificar a gusto)
-                        const chatBox = document.getElementById('chat-box');
-                        chatBox.innerHTML = '';
-                        data.forEach(msg => {
-                            chatBox.innerHTML += `
-                                <div class="message">
-                                    <span class="username">${msg.username}:</span>
-                                    <span>${msg.message}</span>
-                                    <br>
-                                    <small>${msg.created_at}</small>
-                                </div>
-                            `;
-                        });
-                        chatBox.scrollTop = chatBox.scrollHeight; // Desplazar hacia abajo
-                    })//en el caso de dar error se muestra este mensaje
-                    .catch(error => console.error('Error al cargar los mensajes:', error));
-            }
-            //en este caso hago un fetch pero ahora para enviar los mensajes a la base de datos
-            document.getElementById('chat-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const messageInput = document.getElementById('message');
-                const message = messageInput.value;
+     document.addEventListener('DOMContentLoaded', function() {
+    
+    const forumSelect = document.getElementById('forum-select');
+    const forumIdInput = document.getElementById('forum-id');
+    const chatBox = document.getElementById('chat-box');
+    
+    if (forumIdInput.value == 0) {
+        forumIdInput.value = 1;
+    }
 
-                fetch('./send_Msg.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: new URLSearchParams({ message: message })
-                })
-                .then(response => response.json())
-                .then(data => {//de no dar error cargo los mensajes
-                    if (data.error) {
-                        console.error('Error al enviar el mensaje:', data.error);
+    // Función para cargar los mensajes del foro seleccionado
+    function loadMessages() {
+        const forumId = forumIdInput.value;
+        
+        fetch('./get_Msg.php?forum_id=' + forumId)
+            .then(response => response.json())
+            .then(data => {
+                chatBox.innerHTML = '';
+                data.forEach(msg => {
+                    if (msg.validez == 1) {
+                        chatBox.innerHTML += `
+                        <div class="message">
+                            <span class="username">${msg.username}:</span>
+                            <span>${msg.message}</span>
+                            <br>
+                            <small>${msg.created_at}</small>
+                        </div>`;
                     } else {
-                        messageInput.value = ''; // Limpiar el campo de mensaje
-                        loadMessages(); // Recargar los mensajes
+                        chatBox.innerHTML += `
+                        <div class="message">
+                            <span class="username">${msg.username}:</span>
+                            <span>tu mensaje fue borrado por un moderador</span>
+                        </div>`;
                     }
-                })
-                .catch(error => console.error('Error al enviar el mensaje:', error));
-            });
+                });
+                chatBox.scrollTop = chatBox.scrollHeight;
+            })
+            .catch(error => console.error('Error al cargar los mensajes:', error));
+    }
 
-            // Cargar mensajes al cargar la página
-            loadMessages();
+    loadMessages();
+    
+    // Cambiar de foro
+    forumSelect.addEventListener('change', function() {
+        forumIdInput.value = this.value;
+        loadMessages();
+    });
 
-            // Actualizar los mensajes cada 5 segundos
-            setInterval(loadMessages, 5000);
-        });
+    // Enviar nuevo mensaje
+    document.getElementById('chat-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const messageInput = document.getElementById('message');
+
+        function sendMessages() {
+            fetch('./send_Msg.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({ message: messageInput.value, forum_id: forumIdInput.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error al enviar el mensaje:', data.error);
+                } else {
+                    messageInput.value = '';
+                    loadMessages();
+                }
+            })
+            .catch(error => console.error('Error al enviar el mensaje:', error));
+        }
+
+        sendMessages();
+    }); 
+    // Configurar actualizaciones periódicas
+    setInterval(loadMessages, 5000); // Actualiza cada 5 segundos
+});
+
     </script>
 </body>
 </html>
-        

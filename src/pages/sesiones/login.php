@@ -37,7 +37,8 @@ localStorage.setItem("user"= $_SESSION["sesionMain"]["nombre"]);
     ?>
     <hr>
     <label for="">Email: </label>
-    <input type="email" name="email" placeholder="Ingrese su correo electronico">
+    <input type="email" name="email" placeholder="Ingrese su correo electronico"
+    key>
     <label for="">Contraseña: </label>
     <input type="password" name="pass" placeholder="Ingrese su contraseña" required>
     <br>

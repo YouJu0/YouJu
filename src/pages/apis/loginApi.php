@@ -17,7 +17,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
   $fila = $resultado->fetch_row();
   //en caso de ser admin te manda al panel admin
   if ($resultado->num_rows === 1 && $fila[7] == 3) {
-    header("Location:../../panelAdmin.php");
+    header("Location:../admin/panelAdmin.php");
     CloseALL($resultado);
   } //compruebo si hay resultados
   if ($resultado->num_rows === 1 && $fila[7] == 1) {
@@ -32,7 +32,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
       CloseALL($resultado);
     } //si no es valido le aviso 
     else {
-      header("Location:../sesiones/login.php?error=Su cuenta debe ser validada, dirijase a la oficina de la juventud, ubicada en el parque");
+      header("Location:../sesiones/login.php?error=Su cuenta debe ser validada. Dirijase a la oficina de la juventud, ubicada en el parque, junto a su cedula de identidad para que se verifiquen sus datos");
       CloseALL($resultado);
     } //fin de condiciones
 
