@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node --watch ./src/scripts/index.js",
     "start": "node ./src/scripts/index.js",
+    "installALL": "npm install npx tailwindcss install", 
     "style": "npx tailwindcss -i ./input.css -o ./src/main.css --watch"
   },
   "author": "",

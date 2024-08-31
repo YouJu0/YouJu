@@ -2,6 +2,12 @@
 session_start();
 include("../../conexion.php");
 
+// Verifica la conexión a la base de datos
+if (!$mysqli) {
+    echo json_encode(["error" => "Error en la conexión a la base de datos"]);
+    exit();
+}
+
 // Verifica que el parámetro 'forum_id' esté presente
 if (!isset($_GET['forum_id'])) {
     echo json_encode(["error" => "ID del foro no proporcionado"]);
@@ -11,7 +17,7 @@ if (!isset($_GET['forum_id'])) {
 $forumId = intval($_GET['forum_id']);
 
 // Consulta para obtener los mensajes del foro seleccionado
-$query = "SELECT `Mensaje`, `Fecha_mensajes`, `Id_Usuario`,`Validez_Mensaje` FROM `mensajes` WHERE `Id_Foro` = $forumId ORDER BY `Fecha_mensajes` ASC";
+$query = "SELECT `Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje` FROM `mensajes` WHERE `Id_Foro` = $forumId ORDER BY `Fecha_mensajes` ASC";
 $result = mysqli_query($mysqli, $query);
 
 if (!$result) {
@@ -40,5 +46,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     ];
 }
 
+// Configura el encabezado para indicar que el contenido es JSON
+header('Content-Type: application/json');
 echo json_encode($messages);
-?>
