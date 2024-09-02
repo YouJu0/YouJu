@@ -77,9 +77,6 @@ if (!isset($_SESSION['sesionMain'])) {
       right: 20px;
     }
 
-    #services {
-      margin-top: 50px;
-    }
 
     .popup {
       display: none;
@@ -119,7 +116,7 @@ if (!isset($_SESSION['sesionMain'])) {
 
   <!-- Cabeza de la pagina -->
 
-  <img id="img-header" class="flex absolute w-screen mt-9" style="z-index: 100;" src="./assets/headerWave.png" alt="">
+  <img id="img-header" class="flex absolute w-screen mt-9" style="z-index: 100;" src="./assets/header/headerWave.webp" alt="">
 
   <header class="flex flex-row fixed z-[999] h-9 bg-[#A7DE72] py-5 items-center justify-between px-2 top-0 w-screen">
     <div class="flex items-center h-full flex-row gap-4 justify-center">
@@ -129,39 +126,28 @@ if (!isset($_SESSION['sesionMain'])) {
           <img src="assets/menu.svg" class="h-5" alt="">
         </button>
         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[200px] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-menu-trigger">
-          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm
-                  text-gray-800 hover:bg-gray-100 focus:outline-none
-                  focus:bg-gray-100 dark:text-neutral-400
-                  dark:hover:bg-neutral-700 dark:hover:text-neutral-300
-                  dark:focus:bg-neutral-700"
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
             href="#">Inicio</a>
-          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm
-                  text-gray-800 hover:bg-gray-100 focus:outline-none
-                  focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700
-                  dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
             href="#">Servicios</a>
-          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm
-                  text-gray-800 hover:bg-gray-100 focus:outline-none 
-                  focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700
-                  dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+          <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
             href="#">Contacto</a>
         </div>
       </div>
-      <?php
-      if (isset($_SESSION['sesionMain'])) {
-        echo '<a href="./pages/chat/chat.php"> Foro </a>';
-      } else {
-        echo '<button id="openPopup">Foro</button>';
-      }
-      ?>
+      <?php if (isset($_SESSION['sesionMain'])): ?>
+        <a href="./pages/chat/chat.php">Foro</a>
+      <?php else: ?>
+        <button id="openPopup">Foro</button>
+      <?php endif; ?>
 
-      <a href="#"><img src="assets/logo.png" class="flex h-8" alt=""></a>
+
+      <a href="#"><img src="assets/general/logo.webp" class="flex h-8" alt=""></a>
     </div>
 
     <div class="flex items-center h-full flex-row gap-4 justify-center">
       <div class="hs-dropdown relative inline-flex">
         <button id="hs-dropdown-custom-trigger" type="button" class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full">
-          <img class="w-8 h-auto rounded-full" src="assets/users.png">
+          <img class="w-8 h-auto rounded-full" src="assets/header/users.webp">
           <span class="text-[#1B3A61] font-medium truncate max-w-[7.5rem]">
             <?php
             if (isset($_SESSION['sesionMain'])) {
@@ -175,42 +161,33 @@ if (!isset($_SESSION['sesionMain'])) {
         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-dropdown-custom-trigger">
           <?php
           if (!isset($_SESSION['sesionMain'])) {
-          ?>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/login.php">
-              Log-In
-            </a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/register.php">
-              Sign-In
-            </a>
-          <?php
-          } else {
-          ?>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
-              Configuración
-            </a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
-              Mi Perfil
-            </a>
-            <?php
-            if (isset($_SESSION['datosEmprendimiento'])) {
-            ?>
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./emprendimiento.php">
-                emprendimiento : <?php echo $_SESSION['datosEmprendimiento']["nombreEmprendimiento"]; ?>
-              </a>
-            <?php
-            } else {
-            ?>
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/registerEmprendimiento.php">
-                Registrar emprendimieto
-              </a>
-            <?php
-            }
-            ?>
 
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/apis/sessionClose.php">
-              Cerrar sesión
-            </a>
-          <?php
+            echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="./pages/sesiones/login.php">Iniciar sesión</a>
+                  <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="./pages/sesiones/register.php">Registrarse</a>';
+          } else {
+
+            echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="#">Configuración</a>
+                  <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="#">Mi Perfil</a>';
+
+            if (isset($_SESSION["datosEmprendimiento"]["nombreEmprendimiento"])) {
+
+              // echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" 
+              //       href="./emprendimiento.php"> Tu emprendimiento:'  . $_SESSION["datosEmprendimiento"]["nombreEmprendimiento"] . '</a>';
+
+              echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                    href="./emprendimiento.php">Tu emprendimiento</a>';
+            } else {
+              echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" 
+                  href="./pages/sesiones/registerEmprendimiento.php">Registrar emprendimieto</a>';
+            }
+
+
+            echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="./pages/apis/sessionClose.php">Cerrar sesión</a>';
           }
           ?>
         </div>
@@ -225,85 +202,31 @@ if (!isset($_SESSION['sesionMain'])) {
 
   <!-- Inicio de la sección de bienvenida -->
 
-  <style>
-    #welcome {
-      background-image: url("./assets/backgrounds/first.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-  </style>
 
   <main class="container max-w-[100vw] h-auto items-center justify-center ">
-    <section id="welcome" class="flex flex-col xl:flex-row justify-between items-center h-[calc(100vh-3.5rem)] overflow-hidden">
-      <div class="flex flex-col justify-center items-center w-full xl:w-auto">
-        <div class="flex items-center p-14 text-[#A7DE72] overflow-hidden mx-auto ">
-          <img src="./assets/lines-title.png" class="h-32" alt="">
+    <section id="welcome" class="flex flex-col xl:flex-row justify-between items-center h-screen bg-[url('./assets/section-one/bg.webp')] bg-cover bg-no-repeat bg-center overflow-hidden px-24">
+      <div class=" flex flex-col justify-center items-center w-5/6 xl:w-auto">
+        <div class="flex items-center p-14 text-[#A7DE72] overflow-hidden ">
+          <img src="./assets/section-one/lines-title.png" class="h-32" alt="">
           <div class="flex flex-col justify-center mx-4">
-            <h1 class="text-2xl sm:text-xl md:text-3xl lg:text-7xl font-semibold leading-tight text-center mx-auto">¡Bienvenida Juventud!</h1>
-            <img src="./assets/underline.png" class="w-4/5 m-auto mt-2 sm:w-3/5 md:w-2/5 sm:mt-4" alt="">
+            <h1 class="text-2xl sm:text-xl md:text-3xl lg:text-7xl font-semibold leading-tight text-center mx-auto">
+              ¡Bienvenida Juventud!
+            </h1>
+            <img src="./assets/section-one/underline.webp" class="w-4/5 m-auto mt-2 sm:w-3/5 md:w-2/5 sm:mt-4" alt="">
           </div>
-          <img src="./assets/lines-title.png" class="h-32 scale-x-[-1]" alt="">
+          <img src="./assets/section-one/lines-title2.webp" class="h-32 " alt="">
         </div>
 
         <a href="#services" id="start-button" class="btn flex items-center justify-center relative">
           <p class="absolute inset text-4xl font-semibold text-white size-full flex items-center justify-center hover:mt-4 transition-all">
             Continuar
           </p>
-          <img src="./assets/components/btn/btn-green.png" class="btn h-20 sm:h-36" alt="">
+          <img src="./assets/components/btn/btn-green.webp" class="btn w-72" alt="">
         </a>
-
-        <style>
-          div.bubble {
-
-            /* &::after {
-              content: "";
-              position: absolute;
-              inset: 0;
-              background-color: #F3BA4D;
-              z-index: 0;
-              margin-bottom: -10px;
-              border-radius: 0.5rem
-            } */
-
-          }
-        </style>
-
-        <div class="size-[300px] bg-red-200 flex flex-col gap-5">
-
-          <div class="bubble relative w-max max-w-full mb-[8px]">
-            <div class="background absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-            <div class="background sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              asdasdasda
-            </div>
-          </div>
-          <div class="bubble relative w-max max-w-full mb-[8px]">
-            <div class="background absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-            <div class="background sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              asdasdasda
-            </div>
-          </div>
-          <div class="bubble relative w-max max-w-full mb-[8px]">
-            <div class="background absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-            <div class="background sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              asdasdasda
-            </div>
-          </div>
-          <div class="bubble relative w-max max-w-full mb-[8px]">
-            <div class="background absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-            <div class="background sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              asdasdasda
-            </div>
-          </div>
-
-        </div>
       </div>
 
-      <img src="./assets/logo.png" class="h-32 sm:h-80 -rotate-[16deg] mt-10 md:block md:h-60" alt="">
+
+      <img src="./assets/general/logo.webp" class="h-32 sm:h-80 -rotate-[16deg] mt-10 md:block md:h-60" alt="">
     </section>
 
     <!-- Fin de la sección de bienvenida -->
@@ -312,8 +235,7 @@ if (!isset($_SESSION['sesionMain'])) {
 
     <!-- Inicio de Sección de Servicios  -->
 
-    <section id="services" class="flex justify-center items-center h-[calc(100vh+0.56rem)] w-full relative bg-[url('./assets/backgrounds/second.png')] bg-cover bg-no-repeat bg-center">
-      <!-- <img src="" alt="bg" class="absolute left-0 w-full z-[1] top-0"> -->
+    <section id="services" class="flex justify-center items-center h-screen w-full relative bg-[url('./assets/section-two/bg.png')] bg-cover bg-no-repeat bg-center">
       <div class="swiper-container relative w-[200px]">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -349,6 +271,85 @@ if (!isset($_SESSION['sesionMain'])) {
     </section>
 
     <!-- Fin de Sección de Servicios  -->
+
+    <!-- Inicio del Foro y Temas  -->
+
+    <section id="forum-and-threads" class="flex justify-center  items-center h-[calc(100vh+0.56rem)] w-full relative bg-[url('./assets/section-three/bg.webp')] bg-cover bg-no-repeat bg-center">
+
+      <!-- Foro -->
+      <div id="forum" class="w-[600px] flex flex-col gap-5 mx-auto bg-white">
+        <img src="./assets/section-three/freame-header.webp" class="flex w-full relative top-0" alt="">
+        <div class="w-[500px] outline-offset-0 outline-8 outline-[#cede72] flex flex-col gap-5 mx-auto bg-white p-4">
+          <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+            <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+              Drogas
+            </div>
+          </div>
+
+          <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+            <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+              Sexualidad
+            </div>
+          </div>
+
+          <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+            <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+              Violencia
+            </div>
+          </div>
+
+          <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+            <div class=" sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+              LGBTQ+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Temas -->
+
+
+      <div id="threads" class="w-[550px]  flex flex-col gap-5 mx-auto bg-white p-8">
+
+        <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+
+          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+            Drogas
+          </div>
+        </div>
+        <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+
+          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+            Sexualidad
+          </div>
+        </div>
+        <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+
+          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+            Violencia
+          </div>
+        </div>
+        <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
+
+          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+            LGBTQ
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- Fin del Foro y Temas  -->
+
+
   </main>
 
   <!-- Zona para popup -->
@@ -414,11 +415,11 @@ if (!isset($_SESSION['sesionMain'])) {
         const buttonImg = button.querySelector("img")
 
         button.addEventListener("mouseenter", () => {
-          buttonImg.src = "./assets/components/btn/btn-green-hover.png"
+          buttonImg.src = "./assets/components/btn/btn-green-hover.webp"
         });
 
         button.addEventListener("mouseleave", () => {
-          buttonImg.src = "./assets/components/btn/btn-green.png";
+          buttonImg.src = "./assets/components/btn/btn-green.webp";
         });
       });
     });
