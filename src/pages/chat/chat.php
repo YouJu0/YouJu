@@ -60,8 +60,12 @@ if (!isset($_SESSION['sesionMain'])) {
 
     <a href="../../index.php">Volver a la página principal</a>
 
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+
 
             const forumSelect = document.getElementById('forum-select');
             const forumIdInput = document.getElementById('forum-id');
@@ -76,7 +80,6 @@ if (!isset($_SESSION['sesionMain'])) {
             if (forumIdInput.value == 0) {
                 forumIdInput.value = 1;
             }
-
             // Función para cargar los mensajes del foro seleccionado
             function loadMessages() {
                 const forumId = forumIdInput.value;
@@ -94,6 +97,15 @@ if (!isset($_SESSION['sesionMain'])) {
                         <span>${msg.message}</span>
                         <br>
                         <small>${msg.created_at}</small>
+                        ` +
+                                    <?php
+                                    if ($_SESSION['sesionMain']["Id_rango"] == 3) {
+                                    ?> `
+                                        <button onclick="eliminarMSG(${msg.msgId})">eliminar mensaje</button>
+                                     ` +
+                                    <?php
+                                    }
+                                    ?> `
                     </div>`;
                             } else {
                                 chatBox.innerHTML += `
@@ -109,6 +121,24 @@ if (!isset($_SESSION['sesionMain'])) {
             }
             loadMessages();
             // Enviar nuevo mensaje
+
+
+            function eliminarMSG(idMsg) {
+                fetch('./eliminarMSG.php?idmsg=' + idMsg, {
+                        method: 'GET'
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success) {
+                            alert('mensaje eliminado exitosamente');
+                            loadMessages(); // Recargar el caht después de eliminar un msg
+                        } else {
+                            alert('Error al eliminar el mensaje');
+                        }
+                    });
+            }
+
+
             document.getElementById('chat-form').addEventListener('submit', function(event) {
                 event.preventDefault();
                 const messageInput = document.getElementById('message');

@@ -1,21 +1,20 @@
 <?php
-header('Content-Type: application/json');
 
 include("../../../conexion.php");
 
 // Obtener el ID del usuario
-$userId = intval($_GET['id']);
+$idmsg = intval($_GET['idmsg']);
 
 // Actualizar el estado del usuario
-$sql = "UPDATE usuarios SET User_Valido = 1 WHERE Id_Usuario = ?";
+$sql = "UPDATE `mensajes` SET `Validez_Mensaje` = '0' WHERE `mensajes`.`Id_mensaje` = ?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param("i", $userId);
+$stmt->bind_param("i", $idmsg);
 
 $response = [];
 if ($stmt->execute()) {
-    $response['success'] = true;
+  $response['success'] = true;
 } else {
-    $response['success'] = false;
+  $response['success'] = false;
 }
 
 echo json_encode($response);

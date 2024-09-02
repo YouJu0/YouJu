@@ -17,7 +17,7 @@ if (!isset($_GET['forum_id'])) {
 $forumId = intval($_GET['forum_id']);
 
 // Consulta para obtener los mensajes del foro seleccionado
-$query = "SELECT `Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje` FROM `mensajes` WHERE `Id_Foro` = $forumId ORDER BY `Fecha_mensajes` ASC";
+$query = "SELECT `Id_mensaje`,`Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje` FROM `mensajes` WHERE `Id_Foro` = $forumId ORDER BY `Fecha_mensajes` ASC";
 $result = mysqli_query($mysqli, $query);
 
 if (!$result) {
@@ -42,7 +42,8 @@ while ($row = mysqli_fetch_assoc($result)) {
         'username' => $username,
         'message' => htmlspecialchars($row['Mensaje']),
         'created_at' => htmlspecialchars($row['Fecha_mensajes']),
-        'validez' => htmlspecialchars($row['Validez_Mensaje'])
+        'validez' => htmlspecialchars($row['Validez_Mensaje']),
+        'msgId' => htmlspecialchars($row['Id_mensaje'])
     ];
 }
 
