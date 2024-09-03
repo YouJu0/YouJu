@@ -1,7 +1,6 @@
 <?php
 session_start();
 if (!isset($_SESSION['sesionMain'])) {
-    //si no está seteada te manda para login
     header("Location: ../../index.php");
 }
 ?>
@@ -29,12 +28,16 @@ if (!isset($_SESSION['sesionMain'])) {
             border: 1px solid #ccc;
             padding: 10px;
             overflow-y: scroll;
+            display: flex;
+            flex-direction: column-reverse;
+            /* Reverso el orden de los mensajes */
         }
 
         .message {
             margin-bottom: 15px;
         }
     </style>
+
 </head>
 
 <body>
@@ -43,8 +46,8 @@ if (!isset($_SESSION['sesionMain'])) {
     <!-- Selección de Foro -->
     <label for="forum-select">Selecciona un Foro:</label>
     <select id="forum-select">
-        <option value="1" selected="true">ggeneral</option>
-        <option value="2">salud mental</option>
+        <option value="1" selected="true">General</option>
+        <option value="2">Salud Mental</option>
     </select>
 
     <div class="chat-box" id="chat-box">
@@ -52,7 +55,7 @@ if (!isset($_SESSION['sesionMain'])) {
     </div>
 
     <form id="chat-form">
-        <input type="hidden" id="forum-id" name="forum-id" value="">
+        <input type="hidden" id="forum-id" name="forum-id" value="1">
         <label for="message">Mensaje:</label>
         <input type="text" id="message" name="message" required>
         <button type="submit">Enviar</button>
@@ -60,82 +63,78 @@ if (!isset($_SESSION['sesionMain'])) {
 
     <a href="../../index.php">Volver a la página principal</a>
 
-
-
     <script>
+        function eliminarMSG(idMsg) {
+            fetch(`./eliminarMSG.php?idmsg=${idMsg}`, {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert('Mensaje eliminado exitosamente');
+                        loadMessages();
+
+                    } else {
+
+                        alert('Error al eliminar el mensaje: ' + result.error);
+                    }
+                })
+                .catch(error => console.error('Error al eliminar el mensaje:', error));
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-
-
-
             const forumSelect = document.getElementById('forum-select');
             const forumIdInput = document.getElementById('forum-id');
             const chatBox = document.getElementById('chat-box');
+            const isAdmin = <?php echo $_SESSION['sesionMain']["Id_rango"] == 3 ? 'true' : 'false'; ?>;
+
+            let refreshInterval;
 
             // Cambiar de foro
             forumSelect.addEventListener('change', function() {
                 forumIdInput.value = this.value;
                 loadMessages();
             });
-
-            if (forumIdInput.value == 0) {
-                forumIdInput.value = 1;
-            }
             // Función para cargar los mensajes del foro seleccionado
-            function loadMessages() {
-                const forumId = forumIdInput.value;
+            function loadMessages(offset = 0) {
 
-                fetch('./get_Msg.php?forum_id=' + forumId)
+                fetch(`./get_Msg.php?forum_id=${forumIdInput.value}&offset=${offset}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Datos recibidos:', data); // Verifica los datos recibidos
+                        console.log("envio");
+                        if (data.error) {
+                            console.error(data.error);
+                            return;
+                        }
+
                         chatBox.innerHTML = '';
                         data.forEach(msg => {
-                            if (msg.validez == 1) {
+                            let deleteButton = '';
+                            if (isAdmin) {
+                                deleteButton = `<button onclick="eliminarMSG(${msg.msgId})">Eliminar mensaje</button>`;
+                            }
+                            if (msg.validez == 0) {
                                 chatBox.innerHTML += `
-                    <div class="message">
-                        <span class="username">${msg.username}:</span>
-                        <span>${msg.message}</span>
-                        <br>
-                        <small>${msg.created_at}</small>
-                        ` +
-                                    <?php
-                                    if ($_SESSION['sesionMain']["Id_rango"] == 3) {
-                                    ?> `
-                                        <button onclick="eliminarMSG(${msg.msgId})">eliminar mensaje</button>
-                                     ` +
-                                    <?php
-                                    }
-                                    ?> `
-                    </div>`;
+                                <div class="message">
+                                    <span class="username">${msg.username}:</span>
+                                    <span>Tu mensaje fue eliminado por un administrador</span>
+                                    <br>
+                                    <small>${msg.created_at}</small>
+                                </div>`;
                             } else {
                                 chatBox.innerHTML += `
-                    <div class="message">
-                        <span class="username">${msg.username}:</span>
-                        <span>tu mensaje fue borrado por un moderador</span>
-                    </div>`;
+                                <div class="message">
+                                    <span class="username">${msg.username}:</span>
+                                    <span>${msg.message}</span>
+                                    <br>
+                                    <small>${msg.created_at}</small>
+                                    ${deleteButton}
+                                </div>`;
                             }
                         });
                         chatBox.scrollTop = chatBox.scrollHeight;
                     })
                     .catch(error => console.error('Error al cargar los mensajes:', error));
-            }
-            loadMessages();
-            // Enviar nuevo mensaje
-
-
-            function eliminarMSG(idMsg) {
-                fetch('./eliminarMSG.php?idmsg=' + idMsg, {
-                        method: 'GET'
-                    })
-                    .then(response => response.json())
-                    .then(result => {
-                        if (result.success) {
-                            alert('mensaje eliminado exitosamente');
-                            loadMessages(); // Recargar el caht después de eliminar un msg
-                        } else {
-                            alert('Error al eliminar el mensaje');
-                        }
-                    });
             }
 
 
@@ -143,33 +142,42 @@ if (!isset($_SESSION['sesionMain'])) {
                 event.preventDefault();
                 const messageInput = document.getElementById('message');
 
-                function sendMessages() {
-                    fetch('./send_Msg.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
-                            },
-                            body: new URLSearchParams({
-                                message: messageInput.value,
-                                forum_id: forumIdInput.value
-                            })
+                fetch('./send_Msg.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            message: messageInput.value,
+                            forum_id: forumIdInput.value
                         })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.error) {
-                                console.error('Error al enviar el mensaje:', data.error);
-                            } else {
-                                messageInput.value = '';
-                                loadMessages();
-                            }
-                        })
-                        .catch(error => console.error('Error al enviar el mensaje:', error));
-                }
-
-                sendMessages();
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error al enviar el mensaje:', data.error);
+                        } else {
+                            messageInput.value = '';
+                            loadMessages(); // Recargar los mensajes
+                        }
+                    })
+                    .catch(error => console.error('Error al enviar el mensaje:', error));
             });
-            // Configurar actualizaciones periódicas
-            setInterval(loadMessages, 5000); // Actualiza cada 5 segundos
+
+            function startRefresh() {
+                refreshInterval = setInterval(() => loadMessages(), 5000); // Actualiza cada 5 segundos
+            }
+
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    clearInterval(refreshInterval);
+                } else {
+                    startRefresh();
+                }
+            });
+
+            startRefresh();
+            loadMessages();
         });
     </script>
 </body>

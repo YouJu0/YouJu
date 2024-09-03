@@ -9,7 +9,7 @@ if (!isset($_SESSION['sesionMain'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = mysqli_real_escape_string($mysqli, $_POST['message']);
-    $forumId = intval($_POST['forum_id']); // Asegúrate de obtener el ID del foro del POST
+    $forumId = intval($_POST['forum_id']);
     $id = $_SESSION['sesionMain']['id'];
 
     $query = "INSERT INTO `mensajes` (`Id_Usuario`, `Mensaje`, `Fecha_mensajes`, `Id_Foro`, `Validez_Mensaje`)
@@ -23,4 +23,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(["error" => "Método no permitido"]);
 }
-?>

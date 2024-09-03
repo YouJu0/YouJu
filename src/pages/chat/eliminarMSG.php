@@ -1,22 +1,26 @@
 <?php
+session_start();
+include("../../conexion.php");
 
-include("../../../conexion.php");
-
-// Obtener el ID del usuario
-$idmsg = intval($_GET['idmsg']);
-
-// Actualizar el estado del usuario
-$sql = "UPDATE `mensajes` SET `Validez_Mensaje` = '0' WHERE `mensajes`.`Id_mensaje` = ?";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("i", $idmsg);
-
-$response = [];
-if ($stmt->execute()) {
-  $response['success'] = true;
-} else {
-  $response['success'] = false;
+// Verifica si la sesión está iniciada y si el usuario tiene permisos de administrador (Id_rango == 3)
+if (!isset($_SESSION['sesionMain']) || $_SESSION['sesionMain']["Id_rango"] != 3) {
+  echo json_encode(["error" => "No tienes permisos para eliminar mensajes"]);
+  exit();
 }
 
-echo json_encode($response);
+// Verifica que el parámetro 'idmsg' esté presente
+if (!isset($_GET['idmsg'])) {
+  echo json_encode(["error" => "ID del mensaje no proporcionado"]);
+  exit();
+}
 
-$mysqli->close();
+$idMsg = intval($_GET['idmsg']);
+
+// Consulta para actualizar el estado del mensaje
+$query = "UPDATE `mensajes` SET `Validez_Mensaje` = 0 WHERE `Id_mensaje` = $idMsg";
+
+if (mysqli_query($mysqli, $query)) {
+  echo json_encode(["success" => true]);
+} else {
+  echo json_encode(["error" => "Error al eliminar el mensaje: " . mysqli_error($mysqli)]);
+}

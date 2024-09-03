@@ -8,16 +8,22 @@ if (!$mysqli) {
     exit();
 }
 
-// Verifica que el parámetro 'forum_id' esté presente
-if (!isset($_GET['forum_id'])) {
-    echo json_encode(["error" => "ID del foro no proporcionado"]);
+// Verifica que el parámetro 'forum_id' y 'offset' estén presentes
+if (!isset($_GET['forum_id']) || !isset($_GET['offset'])) {
+    echo json_encode(["error" => "ID del foro o offset no proporcionado"]);
     exit();
 }
 
 $forumId = intval($_GET['forum_id']);
+$offset = intval($_GET['offset']);
+$limit = 25; // Número de mensajes a recuperar
 
-// Consulta para obtener los mensajes del foro seleccionado
-$query = "SELECT `Id_mensaje`,`Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje` FROM `mensajes` WHERE `Id_Foro` = $forumId ORDER BY `Fecha_mensajes` ASC";
+// Consulta para obtener los mensajes del foro seleccionado con paginación
+$query = "SELECT `Id_mensaje`, `Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje`
+          FROM `mensajes` 
+          WHERE `Id_Foro` = $forumId 
+          ORDER BY `Id_mensaje` DESC     
+          LIMIT $limit OFFSET $offset";
 $result = mysqli_query($mysqli, $query);
 
 if (!$result) {
