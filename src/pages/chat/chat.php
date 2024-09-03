@@ -100,7 +100,6 @@ if (!isset($_SESSION['sesionMain'])) {
                 fetch(`./get_Msg.php?forum_id=${forumIdInput.value}&offset=${offset}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
                         if (data.error) {
                             console.error(data.error);
                             return;
