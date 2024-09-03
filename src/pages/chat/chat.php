@@ -72,7 +72,6 @@ if (!isset($_SESSION['sesionMain'])) {
                 .then(result => {
                     if (result.success) {
                         alert('Mensaje eliminado exitosamente');
-                        loadMessages();
 
                     } else {
 
@@ -101,7 +100,7 @@ if (!isset($_SESSION['sesionMain'])) {
                 fetch(`./get_Msg.php?forum_id=${forumIdInput.value}&offset=${offset}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log("envio");
+                        console.log(data);
                         if (data.error) {
                             console.error(data.error);
                             return;
@@ -135,6 +134,51 @@ if (!isset($_SESSION['sesionMain'])) {
                         chatBox.scrollTop = chatBox.scrollHeight;
                     })
                     .catch(error => console.error('Error al cargar los mensajes:', error));
+            }
+
+            function loadMoreMessages() {
+                if (lastMessageId) {
+                    fetch(`./get_Msg.php?forum_id=${forumIdInput.value}&last_message_id=${lastMessageId}&load_more=true`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                console.error(data.error);
+                                return;
+                            }
+
+                            if (data.length > 0) {
+                                data.forEach(msg => {
+                                    let deleteButton = '';
+                                    if (isAdmin) {
+                                        deleteButton = `<button onclick="eliminarMSG(${msg.msgId})">Eliminar mensaje</button>`;
+                                    }
+                                    if (msg.validez == 0) {
+                                        chatBox.innerHTML += `
+                                        <div class="message">
+                                            <span class="username">${msg.username}:</span>
+                                            <span>Tu mensaje fue eliminado por un administrador</span>
+                                            <br>
+                                            <small>${msg.created_at}</small>
+                                        </div>`;
+                                    } else {
+                                        chatBox.innerHTML += `
+                                        <div class="message">
+                                            <span class="username">${msg.username}:</span>
+                                            <span>${msg.message}</span>
+                                            <br>
+                                            <small>${msg.created_at}</small>
+                                            ${deleteButton}
+                                        </div>`;
+                                    }
+                                    lastMessageId = msg.msgId; // Actualiza el último ID de mensaje
+                                });
+
+                                chatBox.scrollTop = chatBox.scrollHeight;
+                                loadMoreButton.style.display = data.length < 25 ? 'none' : 'block'; // Oculta el botón si no hay más mensajes
+                            }
+                        })
+                        .catch(error => console.error('Error al cargar más mensajes:', error));
+                }
             }
 
 
