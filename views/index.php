@@ -1,12 +1,13 @@
 <?php
-include_once('./tools/sessionConfig.php');
+include(__DIR__ . '/../controllers/session/config');
+$offline = array(
+  "estado" => "deslogeado",
+  "name" => "guest"
+);
+
 if (!isset($_SESSION['sesionMain'])) {
-  //si no está seteada te manda para login
-  //header("Location: ./pages/sesiones/login.php");
-  $offline = array(
-    "estado" => "deslogeado",
-    "name" => "guest"
-  );
+  // Si no está seteada te manda para login (descomentar si se requiere redirección)
+  // header("Location: ./pages/sesiones/login.php");
 }
 ?>
 
@@ -16,9 +17,9 @@ if (!isset($_SESSION['sesionMain'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./main.css">
-  <link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.min.css">
-  <link rel="stylesheet" href="../node_modules/preline/dist/preline.css">
+  <link rel="stylesheet" href="/style">
+  <link rel="stylesheet" href="/swiper">
+  <link rel="stylesheet" href="/preline">
 
   <title>YouJu | Inicio</title>
   <style>
@@ -77,23 +78,18 @@ if (!isset($_SESSION['sesionMain'])) {
     }
 
 
-    /* Estilo del popup no borrar pls a menos que lo cambien por algo mejor jeje */
     .popup {
       display: none;
-      /* Ocultar el popup por defecto */
       position: fixed;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.7);
-      /* Fondo semitransparente */
       justify-content: center;
       align-items: center;
       z-index: 1000;
-      /* Asegurarse de que esté sobre otros elementos */
       pointer-events: none;
-      /* Deshabilitar interacción con elementos subyacentes */
     }
 
     .popup-content {
@@ -103,7 +99,7 @@ if (!isset($_SESSION['sesionMain'])) {
       width: 300px;
       text-align: center;
       pointer-events: auto;
-      /* Habilitar interacción con el contenido del popup */
+      position: relative;
     }
 
     .close {
@@ -132,7 +128,7 @@ if (!isset($_SESSION['sesionMain'])) {
         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[200px] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-menu-trigger">
           <?php
           $menuItems = [
-            'Inicio' => '#',
+            'Inicio' => '/',
             'Servicios' => '#',
             'Contacto' => '#'
           ];
@@ -142,10 +138,14 @@ if (!isset($_SESSION['sesionMain'])) {
           ?>
         </div>
       </div>
+      <?php if (isset($_SESSION['sesionMain'])): ?>
+        <a href="/chat">Chat</a>
+      <?php else: ?>
+        <button id="openPopup">Chat</button>
+      <?php endif; ?>
 
-      <!-- Enlace al foro o botón para abrir el popup -->
-      <?php echo isset($_SESSION['sesionMain']) ? '<a href="./pages/chat/"> Foro </a>' : '<button id="openPopup">Foro</button>'; ?>
-      <a href="#"><img src="assets/logo.png" class="flex h-8" alt=""></a>
+
+      <a href="#"><img src="assets/general/logo.webp" class="flex h-8" alt=""></a>
     </div>
 
     <div class="flex items-center h-full flex-row gap-4 justify-center">
@@ -153,26 +153,52 @@ if (!isset($_SESSION['sesionMain'])) {
         <button id="hs-dropdown-custom-trigger" type="button" class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full">
           <img class="w-8 h-auto rounded-full" src="assets/header/users.webp">
           <span class="text-[#1B3A61] font-medium truncate max-w-[7.5rem]">
-            <?php echo isset($_SESSION['sesionMain']) ? $_SESSION['sesionMain']['nombre'] : $offline["name"]; ?>
+            <?php
+            if (isset($_SESSION['sesionMain'])) {
+              echo $_SESSION['sesionMain']['nombre'];
+            } else {
+              echo $offline["name"];
+            }
+            ?>
           </span>
         </button>
         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-dropdown-custom-trigger">
-          <?php if (!isset($_SESSION['sesionMain'])): ?>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/login.php">Log-In</a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/register.php">Sign-In</a>
-          <?php else: ?>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">Configuración</a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">Mi Perfil</a>
-            <?php if ($_SESSION['sesionMain']["Id_rango"] == 3): ?>
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/admin/panelAdmin.php">panel admin</a>
-            <?php endif; ?>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/apis/sessionClose.php">Cerrar sesión</a>
-          <?php endif; ?>
+          <?php
+          if (!isset($_SESSION['sesionMain'])) {
+
+            echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="/login">Iniciar sesión</a>
+                  <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="/register">Registrarse</a>';
+          } else {
+
+            echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="#">Configuración</a>
+                  <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="#">Mi Perfil</a>';
+
+            if (isset($_SESSION["datosEmprendimiento"]["nombreEmprendimiento"])) {
+
+              // echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" 
+              //       href="./emprendimiento.php"> Tu emprendimiento:'  . $_SESSION["datosEmprendimiento"]["nombreEmprendimiento"] . '</a>';
+
+              echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                    href="./emprendimiento.php">Tu emprendimiento</a>';
+            } else {
+              echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" 
+                  href="./pages/sesiones/registerEmprendimiento.php">Registrar emprendimieto</a>';
+            }
+
+
+            echo '<a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700"
+                  href="/session/close">Cerrar sesión</a>';
+          }
+          ?>
         </div>
       </div>
     </div>
-  </header>
 
+  </header>
 
   <!-- Fin de la sección de encabezado -->
 
@@ -349,12 +375,13 @@ if (!isset($_SESSION['sesionMain'])) {
 
 
   </main>
-  <!--zona para popup -->
+
+  <!-- Zona para popup -->
   <div id="popup" class="popup">
     <div class="popup-content">
       <span id="closePopup" class="close">&times;</span>
       <h2>Usuario Offline</h2>
-      <p>para acceder a todo el contenido de la pagina debes de estar logeado</p>
+      <p>Para acceder a todo el contenido de la página debes de estar logeado.</p>
       <a href="./pages/sesiones/login.php">[Log-In]</a>
       <br>
       <a href="./pages/sesiones/register.php">[Sign-In]</a>
@@ -382,7 +409,7 @@ if (!isset($_SESSION['sesionMain'])) {
     });
   </script>
 
-  <!--script para los popups by el papu osea dilan -->
+  <!-- Script para los popups -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const openPopupButton = document.getElementById('openPopup');
@@ -399,7 +426,7 @@ if (!isset($_SESSION['sesionMain'])) {
         popup.style.pointerEvents = 'none'; // Deshabilitar interacción con el popup
       });
 
-      // Opcional: Ocultar el popup si se hace clic fuera de él
+      // Ocultar el popup si se hace clic fuera de él
       window.addEventListener('click', (event) => {
         if (event.target === popup) {
           popup.style.display = 'none';

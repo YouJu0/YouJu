@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['sesionMain'])) {
-  header("Location:../../index.php");
+  header("Location:/");
 }
 ?>
 <!DOCTYPE html>
@@ -10,12 +10,12 @@ if (isset($_SESSION['sesionMain'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../main.css">
+  <link rel="stylesheet" href="/style">
   <title>cuenta</title>
 </head>
 
 <body>
-  <form action="../apis/registerApi.php" method="POST">
+  <form action="/controller/register" method="POST">
     <h1> Iniciar sesion</h1>
     <hr>
     <?php
@@ -64,7 +64,7 @@ if (isset($_SESSION['sesionMain'])) {
     <br>
 
     <!-- -->
-    <a href="./login.php">[ -ingresar- ]</a>
+    <a href="/login">[ -ingresar- ]</a>
 
   </form>
 </body>

@@ -1,15 +1,16 @@
 <?php
 session_start();
 //para poder llamarlo
-include("../../conexion.php");
-include("../../tools/crypter.php");
+include
+include('/../../controllers/connection/module.connection.php');
+
 //compruebo si los campos estan seteados
 if (isset($_POST["email"]) && isset($_POST["pass"])) {
   //cargo los datos validados en variables
   $email = validarLogin($_POST["email"]);
   $pass = validarLogin($_POST['pass']);
   //encripto la contraseña
-  $passcrypt = encryption($pass);
+  $passcrypt = md5($pass);
   //creo la query
   $Qlogin = "SELECT * FROM `usuarios` where `Email` = '$email' and `Contraseña` = '$passcrypt'";
   //hago la consulta y la cargo en un array
@@ -18,7 +19,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
   //en caso de ser admin te manda al panel admin
   if ($resultado->num_rows === 1 && $fila[7] == 3) {
     logear($fila, $resultado);
-    header("Location:../../index.php");
+    header("Location: /");
     CloseALL($resultado);
   }
 
@@ -29,25 +30,25 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
       sessionEmprendimiento($fila, $mysqli, $resultado);
     } //de estar en la lista negra se les avisa
     elseif ($fila[6] == 1) {
-      header("Location:../sesiones/login.php?error=Ese usuario a sido 
+      header("Location: /login?error=Ese usuario a sido 
           baneado permanentemente no intente registrarse nuevamente.");
 
       CloseALL($resultado);
     } //si no es valido le aviso 
     else {
-      header("Location:../sesiones/login.php?error=Su cuenta debe ser validada. Dirijase a la oficina de la juventud, ubicada en el parque, junto a su cedula de identidad para que se verifiquen sus datos");
+      header("Location: /login?error=Su cuenta debe ser validada. Dirijase a la oficina de la juventud, ubicada en el parque, junto a su cedula de identidad para que se verifiquen sus datos");
       CloseALL($resultado);
     } //fin de condiciones
 
   } //si no se encuentra su usuario le aviso
   else {
     //fallo principal, no se encontro los datos en la base de datos
-    header("Location:../sesiones/login.php?error=Compruebe usuario y contraseña");
+    header("Location: /login?error=Compruebe usuario y contraseña");
     CloseALL($resultado);
   } //fin de condiciones
 } //si no esta seteado le aviso
 else {
-  header("Location:../sesiones/login.php?error=Los campos son requeridos");
+  header("Location: /login?error=Los campos son requeridos");
   exit();
 } //fin de condiciones
 
@@ -85,7 +86,7 @@ function logear($fila, $resultado)
   $datosSesion = array('id' => $fila[0], 'nombre' => $fila[1], 'apellido' => $fila[2], 'correo' => $fila[4], 'Lista_N' => $fila[6], 'Id_rango' => $fila[7], 'User_Valido' => $fila[8]);
   $_SESSION['sesionMain'] = $datosSesion;
   setcookie("user", $_SESSION['sesionMain']["nombre"], time() + 9000);
-  header("Location:../../index.php");
+  header("Location: /");
   CloseALL($resultado);
 }
 //funcion para cerrar las conexiones y las consultas

@@ -1,14 +1,12 @@
 <?php
 session_start();
 if (isset($_SESSION['sesionMain'])) {
-  header("Location:../index.php");
+  header("Location:/");
   session_set_cookie_params(60 * 0.5);
 }
 ?>
 <script>
-  
-localStorage.setItem("user"= $_SESSION["sesionMain"]["nombre"]);
-
+  localStorage.setItem("user" = $_SESSION["sesionMain"]["nombre"]);
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,12 +14,12 @@ localStorage.setItem("user"= $_SESSION["sesionMain"]["nombre"]);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../main.css">
+  <link rel="stylesheet" href="/style">
   <title>cuenta</title>
 </head>
 
 <body>
-  <form action="../apis/loginApi.php" method="POST">
+  <form action="/controller/login" method="POST">
     <h1> Iniciar sesion</h1>
     <hr>
     <?php
@@ -38,12 +36,13 @@ localStorage.setItem("user"= $_SESSION["sesionMain"]["nombre"]);
     <hr>
     <label for="">Email: </label>
     <input type="email" name="email" placeholder="Ingrese su correo electronico"
-    key>
+      key>
     <label for="">Contraseña: </label>
     <input type="password" name="pass" placeholder="Ingrese su contraseña" required>
     <br>
     <button type="submit">[ -Iniciar sesion- ]</button>
-    <a href="./register.php">[ -Registrarse- ]</a>
+    <a href="/register">[ -Registrarse- ]</a>
   </form>
 </body>
+
 </html>

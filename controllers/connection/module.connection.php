@@ -1,5 +1,5 @@
 <?php
-$hostN = 'utuserver.duckdns.org';
+$hostN = 'utuserver.giize.com';
 $port = "3306";
 $UserName = 'utu';
 $UserPass = 'utu2023';
