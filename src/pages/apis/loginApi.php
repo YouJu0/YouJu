@@ -17,9 +17,12 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
   $fila = $resultado->fetch_row();
   //en caso de ser admin te manda al panel admin
   if ($resultado->num_rows === 1 && $fila[7] == 3) {
-    header("Location:../admin/panelAdmin.php");
+    logear($fila, $resultado);
+    header("Location:../../index.php");
     CloseALL($resultado);
-  } //compruebo si hay resultados
+  }
+
+  //compruebo si hay resultados
   if ($resultado->num_rows === 1 && $fila[7] == 1) {
     //compruebo que no este en la lista negra
     if ($fila[6] == 0 && $fila[8] == 1) {
