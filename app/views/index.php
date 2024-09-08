@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../controllers/session/config');
+include('');
 $offline = array(
   "estado" => "deslogeado",
   "name" => "guest"

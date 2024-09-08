@@ -1,8 +1,7 @@
 <?php
 session_start();
 //para poder llamarlo
-include
-include('/../../controllers/connection/module.connection.php');
+include('');
 
 //compruebo si los campos estan seteados
 if (isset($_POST["email"]) && isset($_POST["pass"])) {
