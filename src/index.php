@@ -135,9 +135,9 @@ if (!isset($_SESSION['sesionMain'])) {
         </div>
       </div>
       <?php if (isset($_SESSION['sesionMain'])): ?>
-        <a href="./pages/chat/chat.php">Foro</a>
+        <a href="./pages/chat/chat.php">Chat</a>
       <?php else: ?>
-        <button id="openPopup">Foro</button>
+        <button id="openPopup">Chat</button>
       <?php endif; ?>
 
 
@@ -207,14 +207,14 @@ if (!isset($_SESSION['sesionMain'])) {
     <section id="welcome" class="flex flex-col xl:flex-row justify-between items-center h-screen bg-[url('./assets/section-one/bg.webp')] bg-cover bg-no-repeat bg-center overflow-hidden px-24">
       <div class=" flex flex-col justify-center items-center w-5/6 xl:w-auto">
         <div class="flex items-center p-14 text-[#A7DE72] overflow-hidden ">
-          <img src="./assets/section-one/lines-title.png" class="h-32" alt="">
+          <img src="./assets/section-one/lines-title.webp" class="w-24" alt="">
           <div class="flex flex-col justify-center mx-4">
             <h1 class="text-2xl sm:text-xl md:text-3xl lg:text-7xl font-semibold leading-tight text-center mx-auto">
               ¡Bienvenida Juventud!
             </h1>
-            <img src="./assets/section-one/underline.webp" class="w-4/5 m-auto mt-2 sm:w-3/5 md:w-2/5 sm:mt-4" alt="">
+            <img src="./assets/section-one/underline.webp" class="w-24 m-auto mt-2 sm:w-3/5 md:w-2/5 sm:mt-4" alt="">
           </div>
-          <img src="./assets/section-one/lines-title2.webp" class="h-32 " alt="">
+          <img src="./assets/section-one/lines-title2.webp" class="h-32" alt="">
         </div>
 
         <a href="#services" id="start-button" class="btn flex items-center justify-center relative">
@@ -235,7 +235,7 @@ if (!isset($_SESSION['sesionMain'])) {
 
     <!-- Inicio de Sección de Servicios  -->
 
-    <section id="services" class="flex justify-center items-center h-screen w-full relative bg-[url('./assets/section-two/bg.png')] bg-cover bg-no-repeat bg-center">
+    <section id="services" class="flex justify-center items-center h-screen w-full relative bg-[url('./assets/section-two/bg.webp')] bg-cover bg-no-repeat bg-center">
       <div class="swiper-container relative w-[200px]">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -272,82 +272,102 @@ if (!isset($_SESSION['sesionMain'])) {
 
     <!-- Fin de Sección de Servicios  -->
 
-    <!-- Inicio del Foro y Temas  -->
+    <!-- Inicio del Chat y Temas  -->
 
-    <section id="forum-and-threads" class="flex justify-center  items-center h-[calc(100vh+0.56rem)] w-full relative bg-[url('./assets/section-three/bg.webp')] bg-cover bg-no-repeat bg-center">
+    <section id="chat-and-threads" class="flex justify-center  items-center h-[calc(100vh+0.56rem)] w-full relative bg-[url('./assets/section-three/bg.webp')] bg-cover bg-no-repeat bg-center">
 
-      <!-- Foro -->
-      <div id="forum" class="w-[600px] flex flex-col gap-5 mx-auto bg-white">
-        <img src="./assets/section-three/freame-header.webp" class="flex w-full relative top-0" alt="">
-        <div class="w-[500px] outline-offset-0 outline-8 outline-[#cede72] flex flex-col gap-5 mx-auto bg-white p-4">
-          <div class="bubble relative self-end w-max max-w-full mb-[8px]">
-            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-            <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              Drogas
-            </div>
-          </div>
-
-          <div class="bubble relative self-start w-max max-w-full mb-[8px]">
-            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-            <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              Sexualidad
-            </div>
-          </div>
-
-          <div class="bubble relative self-end w-max max-w-full mb-[8px]">
-            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-            <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              Violencia
-            </div>
-          </div>
-
-          <div class="bubble relative self-start w-max max-w-full mb-[8px]">
-            <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-            <div class=" sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-              LGBTQ+
-            </div>
-          </div>
+      <!-- Temas -->
+      <div id="threads" class="w-[650px]  flex flex-col mx-auto p-8">
+        <div class="flex justify-between items-stretch h-max ">
+          <img src="./assets/section-three/shape.webp" class="flex w-10" alt="">
+          <h3 class="flex bg-[#fff768] relative w-full justify-center items-center h-auto text-3xl font-bold border-t-4 border-[#fbba45]">Tema</h3>
+          <img src="./assets/section-three/shape.webp" class="flex w-10 scale-x-[-1]" alt="">
         </div>
 
+        <div class="flex relative outline-offset-0 outline-8 -top-1  flex-col gap-5 mx-auto p-4 border-x-4 border-b-4 rounded-b-xl bg-[#fff768] border-[#fbba45] w-[calc(100%-4.5rem)]">
+
+          <div class="w-full rounded-md outline-offset-0 outline-8 flex flex-col gap-5 mx-auto -mt-4 bg-white p-4">
+            <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                Drogas
+              </div>
+            </div>
+            <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                Sexualidad
+              </div>
+            </div>
+            <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                Violencia
+              </div>
+            </div>
+            <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                LGBTQ
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
 
       <!-- Temas -->
 
 
-      <div id="threads" class="w-[550px]  flex flex-col gap-5 mx-auto bg-white p-8">
 
-        <div class="bubble relative self-end w-max max-w-full mb-[8px]">
-          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-            Drogas
-          </div>
-        </div>
-        <div class="bubble relative self-start w-max max-w-full mb-[8px]">
-          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-            Sexualidad
-          </div>
-        </div>
-        <div class="bubble relative self-end w-max max-w-full mb-[8px]">
-          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-            Violencia
-          </div>
-        </div>
-        <div class="bubble relative self-start w-max max-w-full mb-[8px]">
-          <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#F3BA4D]"></div>
-
-          <div class="sticky z-10 border-4 border-[#F3BA4D] w-max max-w-full bg-yellow-300 text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
-            LGBTQ
-          </div>
+      <div id="chat" class="w-[650px]  flex flex-col mx-auto p-8">
+        <div class="flex justify-between items-stretch h-max ">
+          <img src="./assets/section-three/shape.webp" class="flex w-10" alt="">
+          <h3 class="flex bg-[#fff768] relative w-full justify-center items-center h-auto text-3xl font-bold border-t-4 border-[#fbba45]">Chat</h3>
+          <img src="./assets/section-three/shape.webp" class="flex w-10 scale-x-[-1]" alt="">
         </div>
 
+        <div class="flex relative outline-offset-0 outline-8 -top-1  flex-col gap-5 mx-auto p-4 border-x-4 border-b-4 rounded-b-xl bg-[#fff768] border-[#fbba45] w-[calc(100%-4.5rem)]">
+
+          <div class="w-full rounded-md outline-offset-0 outline-8 flex flex-col gap-5 mx-auto -mt-4 bg-white p-4">
+            <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                Drogas
+              </div>
+            </div>
+            <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                Sexualidad
+              </div>
+            </div>
+            <div class="bubble relative self-end w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                Violencia
+              </div>
+            </div>
+            <div class="bubble relative self-start w-max max-w-full mb-[8px]">
+              <div class="absolute z-0 left-[50%] translate-x-[-50%] w-full h-full top-[8px] rounded-2xl bg-[#fbba45]"></div>
+
+              <div class="sticky z-10 border-4 border-[#fbba45] w-max max-w-full bg-[#fff768] text-green-900 font-bold text-lg px-4 py-2 rounded-2xl truncate">
+                LGBTQ
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </section>
-    <!-- Fin del Foro y Temas  -->
+    <!-- Fin del Chat y Temas  -->
 
 
   </main>
