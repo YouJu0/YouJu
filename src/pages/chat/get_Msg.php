@@ -15,9 +15,23 @@ if (!isset($_GET['forum_id'])) {
 }
 
 $forumId = intval($_GET['forum_id']);
+$lastMessageId = isset($_GET['last_message_id']) ? intval($_GET['last_message_id']) : 0;
+$loadMore = isset($_GET['load_more']) && $_GET['load_more'] == 'true';
+$limit = 25;
 
 // Consulta para obtener los mensajes del foro seleccionado
-$query = "SELECT `Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje` FROM `mensajes` WHERE `Id_Foro` = $forumId ORDER BY `Fecha_mensajes` ASC";
+$query = $loadMore
+    ? "SELECT `Id_mensaje`, `Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje`
+       FROM `mensajes` 
+       WHERE `Id_Foro` = $forumId AND `Id_mensaje` < $lastMessageId
+       ORDER BY `Id_mensaje` DESC 
+       LIMIT $limit"
+    : "SELECT `Id_mensaje`, `Mensaje`, `Fecha_mensajes`, `Id_Usuario`, `Validez_Mensaje`
+       FROM `mensajes` 
+       WHERE `Id_Foro` = $forumId
+       ORDER BY `Id_mensaje` DESC 
+       LIMIT $limit";
+
 $result = mysqli_query($mysqli, $query);
 
 if (!$result) {
@@ -42,7 +56,8 @@ while ($row = mysqli_fetch_assoc($result)) {
         'username' => $username,
         'message' => htmlspecialchars($row['Mensaje']),
         'created_at' => htmlspecialchars($row['Fecha_mensajes']),
-        'validez' => htmlspecialchars($row['Validez_Mensaje'])
+        'validez' => htmlspecialchars($row['Validez_Mensaje']),
+        'msgId' => htmlspecialchars($row['Id_mensaje'])
     ];
 }
 

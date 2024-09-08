@@ -135,7 +135,7 @@ if (!isset($_SESSION['sesionMain'])) {
         </div>
       </div>
       <?php if (isset($_SESSION['sesionMain'])): ?>
-        <a href="./pages/chat/chat.php">Chat</a>
+        <a href="./pages/chat/">Chat</a>
       <?php else: ?>
         <button id="openPopup">Chat</button>
       <?php endif; ?>
