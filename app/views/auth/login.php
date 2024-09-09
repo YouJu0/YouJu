@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['sesionMain'])) {
-  header("Location:/");
+  header("Location: /");
   session_set_cookie_params(60 * 0.5);
 }
 ?>
