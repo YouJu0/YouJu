@@ -1,5 +1,5 @@
 <?php
-include("/connection");
+include(__DIR__ . '/../connection/module.connection.php');
 
 //verifica si los campos no estan vacios
 if (

@@ -7,7 +7,7 @@
     "dev": "node --watch ./src/scripts/index.js",
     "start": "node ./src/scripts/index.js",
     "installALL": "npm install npx tailwindcss install", 
-    "style": "npx tailwindcss -i ./input.css -o ./src/main.css --watch"
+    "style": "npx tailwindcss -i ./input.css -o ./app/style/main.css --watch"
   },
   "author": "",
   "license": "ISC",

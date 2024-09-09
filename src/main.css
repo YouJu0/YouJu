@@ -2451,20 +2451,48 @@ video {
   background-image: url('../../assets/chat/bg.webp');
 }
 
-.bg-\[url\(\'\/app\/assets\/section-one\/bg\.webp\'\)\] {
-  background-image: url('/app/assets/section-one/bg.webp');
-}
-
 .bg-\[url\(\'\/app\/assets\/section-three\/bg\.webp\'\)\] {
   background-image: url('/app/assets/section-three/bg.webp');
 }
 
-.bg-\[url\(\'\/app\/assets\/section-two\/bg\.webp\'\)\] {
-  background-image: url('/app/assets/section-two/bg.webp');
-}
-
 .bg-\[url\(\'app\/assets\/section-one\/bg\.webp\'\)\] {
   background-image: url('app/assets/section-one/bg.webp');
+}
+
+.bg-\[url\(\'app\/assets\/section-two\/bg\.webp\'\)\] {
+  background-image: url('app/assets/section-two/bg.webp');
+}
+
+.bg-\[url\(\'app\/assets\/section-three\/bg\.webp\'\)\] {
+  background-image: url('app/assets/section-three/bg.webp');
+}
+
+.bg-\[url\(\'\.\/assets\/section-one\/bg\.webp\'\)\] {
+  background-image: url('./assets/section-one/bg.webp');
+}
+
+.bg-\[url\(\'\.\/assets\/section-three\/bg\.webp\'\)\] {
+  background-image: url('./assets/section-three/bg.webp');
+}
+
+.bg-\[url\(\'\.\/assets\/section-two\/bg\.webp\'\)\] {
+  background-image: url('./assets/section-two/bg.webp');
+}
+
+.bg-\[url\(\'\.\.\/assets\/section-one\/bg\.webp\'\)\] {
+  background-image: url('../assets/section-one/bg.webp');
+}
+
+.bg-\[url\(\'assets\/section-one\/bg\.webp\'\)\] {
+  background-image: url('assets/section-one/bg.webp');
+}
+
+.bg-\[url\(\'\/assets\/section-one\/bg\.webp\'\)\] {
+  background-image: url('/assets/section-one/bg.webp');
+}
+
+.bg-\[url\(\'\/app\/assets\/section-one\/bg\.webp\'\)\] {
+  background-image: url('/app/assets/section-one/bg.webp');
 }
 
 .decoration-slice {

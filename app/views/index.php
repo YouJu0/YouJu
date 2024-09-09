@@ -1,8 +1,8 @@
 <?php
-include('');
+include('app/controllers/connection/module.connection.php');
 $offline = array(
   "estado" => "deslogeado",
-  "name" => "guest"
+  "name" => "Invitado"
 );
 
 if (!isset($_SESSION['sesionMain'])) {
@@ -17,9 +17,10 @@ if (!isset($_SESSION['sesionMain'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/style">
-  <link rel="stylesheet" href="/swiper">
-  <link rel="stylesheet" href="/preline">
+  <link rel="stylesheet" href="../app/style/main.css">
+  <link rel="stylesheet" href="../../node_modules/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../..//node_modules/preline/dist/preline.css">
+
 
   <title>YouJu | Inicio</title>
   <style>
@@ -116,14 +117,14 @@ if (!isset($_SESSION['sesionMain'])) {
 
   <!-- Cabeza de la pagina -->
 
-  <img id="img-header" class="flex absolute w-screen mt-9" style="z-index: 100;" src="./assets/header/headerWave.webp" alt="">
+  <img id="img-header" class="flex absolute w-screen mt-9" style="z-index: 100;" src="app/assets/header/headerWave.webp" alt="">
 
   <header class="flex flex-row fixed z-[999] h-9 bg-[#A7DE72] py-5 items-center justify-between px-2 top-0 w-screen">
     <div class="flex items-center h-full flex-row gap-4 justify-center">
       <!-- Menú desplegable de izquierda a derecha -->
       <div class="hs-dropdown relative inline-flex">
         <button id="hs-menu-trigger" type="button" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm font-semibold">
-          <img src="assets/menu.svg" class="h-5" alt="">
+          <img src="app/assets/menu.svg" class="h-5" alt="">
         </button>
         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[200px] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-menu-trigger">
           <?php
@@ -145,13 +146,13 @@ if (!isset($_SESSION['sesionMain'])) {
       <?php endif; ?>
 
 
-      <a href="#"><img src="assets/general/logo.webp" class="flex h-8" alt=""></a>
+      <a href="#"><img src="app/assets/general/logo.webp" class="flex h-8" alt=""></a>
     </div>
 
     <div class="flex items-center h-full flex-row gap-4 justify-center">
       <div class="hs-dropdown relative inline-flex">
         <button id="hs-dropdown-custom-trigger" type="button" class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full">
-          <img class="w-8 h-auto rounded-full" src="assets/header/users.webp">
+          <img class="w-8 h-auto rounded-full" src="app/assets/header/users.webp">
           <span class="text-[#1B3A61] font-medium truncate max-w-[7.5rem]">
             <?php
             if (isset($_SESSION['sesionMain'])) {
@@ -208,29 +209,29 @@ if (!isset($_SESSION['sesionMain'])) {
 
 
   <main class="container max-w-[100vw] h-auto items-center justify-center ">
-    <section id="welcome" class="flex flex-col xl:flex-row justify-between items-center h-screen bg-[url('./assets/section-one/bg.webp')] bg-cover bg-no-repeat bg-center overflow-hidden px-24">
+    <section id="welcome" class="flex flex-col xl:flex-row justify-between items-center h-screen bg-[url('app/assets/section-one/bg.webp')] bg-cover bg-no-repeat bg-center overflow-hidden px-24">
       <div class=" flex flex-col justify-center items-center w-5/6 xl:w-auto">
         <div class="flex items-center p-14 text-[#A7DE72] overflow-hidden ">
-          <img src="./assets/section-one/lines-title.webp" class="w-24" alt="">
+          <img src="app/assets/section-one/lines-title.webp" class="w-24" alt="">
           <div class="flex flex-col justify-center mx-4">
             <h1 class="text-2xl sm:text-xl md:text-3xl lg:text-7xl font-semibold leading-tight text-center mx-auto">
               ¡Bienvenida Juventud!
             </h1>
-            <img src="./assets/section-one/underline.webp" class="w-24 m-auto mt-2 sm:w-3/5 md:w-2/5 sm:mt-4" alt="">
+            <img src="app/assets/section-one/underline.webp" class="w-24 m-auto mt-2 sm:w-3/5 md:w-2/5 sm:mt-4" alt="">
           </div>
-          <img src="./assets/section-one/lines-title2.webp" class="h-32" alt="">
+          <img src="app/assets/section-one/lines-title2.webp" class="h-32" alt="">
         </div>
 
         <a href="#services" id="start-button" class="btn flex items-center justify-center relative">
           <p class="absolute inset text-4xl font-semibold text-white size-full flex items-center justify-center hover:mt-4 transition-all">
             Continuar
           </p>
-          <img src="./assets/components/btn/btn-green.webp" class="btn w-72" alt="">
+          <img src="app/assets/components/btn/btn-green.webp" class="btn w-72" alt="">
         </a>
       </div>
 
 
-      <img src="./assets/general/logo.webp" class="h-32 sm:h-80 -rotate-[16deg] mt-10 md:block md:h-60" alt="">
+      <img src="app/assets/general/logo.webp" class="h-32 sm:h-80 -rotate-[16deg] mt-10 md:block md:h-60" alt="">
     </section>
 
     <!-- Fin de la sección de bienvenida -->
@@ -239,26 +240,26 @@ if (!isset($_SESSION['sesionMain'])) {
 
     <!-- Inicio de Sección de Servicios  -->
 
-    <section id="services" class="flex justify-center items-center h-screen w-full relative bg-[url('./assets/section-two/bg.webp')] bg-cover bg-no-repeat bg-center">
+    <section id="services" class="flex justify-center items-center h-screen w-full relative bg-[url('/app/assets/section-two/bg.webp')] bg-cover bg-no-repeat bg-center">
       <div class="swiper-container relative w-[200px]">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="./assets/emprendimientos/a.webp" alt="Imagen 1" />
+            <img src="app/assets/emprendimientos/a.webp" alt="Imagen 1" />
           </div>
           <div class="swiper-slide">
-            <img src="./assets/emprendimientos/b.webp" alt="Imagen 2" />
+            <img src="app/assets/emprendimientos/b.webp" alt="Imagen 2" />
           </div>
           <div class="swiper-slide">
-            <img src="./assets/emprendimientos/c.webp" alt="Imagen 3" />
+            <img src="app/assets/emprendimientos/c.webp" alt="Imagen 3" />
           </div>
           <div class="swiper-slide">
-            <img src="./assets/emprendimientos/a.webp" alt="Imagen 1" />
+            <img src="app/assets/emprendimientos/a.webp" alt="Imagen 1" />
           </div>
           <div class="swiper-slide">
-            <img src="./assets/emprendimientos/b.webp" alt="Imagen 2" />
+            <img src="app/assets/emprendimientos/b.webp" alt="Imagen 2" />
           </div>
           <div class="swiper-slide">
-            <img src="./assets/emprendimientos/c.webp" alt="Imagen 3" />
+            <img src="app/assets/emprendimientos/c.webp" alt="Imagen 3" />
           </div>
         </div>
 
@@ -278,14 +279,14 @@ if (!isset($_SESSION['sesionMain'])) {
 
     <!-- Inicio del Chat y Temas  -->
 
-    <section id="chat-and-threads" class="flex justify-center  items-center h-[calc(100vh+0.56rem)] w-full relative bg-[url('./assets/section-three/bg.webp')] bg-cover bg-no-repeat bg-center">
+    <section id="chat-and-threads" class="flex justify-center  items-center h-[calc(100vh+0.56rem)] w-full relative bg-[url('/app/assets/section-three/bg.webp')] bg-cover bg-no-repeat bg-center">
 
       <!-- Temas -->
       <div id="threads" class="w-[650px]  flex flex-col mx-auto p-8">
         <div class="flex justify-between items-stretch h-max ">
-          <img src="./assets/section-three/shape.webp" class="flex w-10" alt="">
+          <img src="app/assets/section-three/shape.webp" class="flex w-10" alt="">
           <h3 class="flex bg-[#fff768] relative w-full justify-center items-center h-auto text-3xl font-bold border-t-4 border-[#fbba45]">Tema</h3>
-          <img src="./assets/section-three/shape.webp" class="flex w-10 scale-x-[-1]" alt="">
+          <img src="app/assets/section-three/shape.webp" class="flex w-10 scale-x-[-1]" alt="">
         </div>
 
         <div class="flex relative outline-offset-0 outline-8 -top-1  flex-col gap-5 mx-auto p-4 border-x-4 border-b-4 rounded-b-xl bg-[#fff768] border-[#fbba45] w-[calc(100%-4.5rem)]">
@@ -330,9 +331,9 @@ if (!isset($_SESSION['sesionMain'])) {
 
       <div id="chat" class="w-[650px]  flex flex-col mx-auto p-8">
         <div class="flex justify-between items-stretch h-max ">
-          <img src="./assets/section-three/shape.webp" class="flex w-10" alt="">
+          <img src="app/assets/section-three/shape.webp" class="flex w-10" alt="">
           <h3 class="flex bg-[#fff768] relative w-full justify-center items-center h-auto text-3xl font-bold border-t-4 border-[#fbba45]">Chat</h3>
-          <img src="./assets/section-three/shape.webp" class="flex w-10 scale-x-[-1]" alt="">
+          <img src="app/assets/section-three/shape.webp" class="flex w-10 scale-x-[-1]" alt="">
         </div>
 
         <div class="flex relative outline-offset-0 outline-8 -top-1  flex-col gap-5 mx-auto p-4 border-x-4 border-b-4 rounded-b-xl bg-[#fff768] border-[#fbba45] w-[calc(100%-4.5rem)]">
@@ -439,11 +440,11 @@ if (!isset($_SESSION['sesionMain'])) {
         const buttonImg = button.querySelector("img")
 
         button.addEventListener("mouseenter", () => {
-          buttonImg.src = "./assets/components/btn/btn-green-hover.webp"
+          buttonImg.src = "app/assets/components/btn/btn-green-hover.webp"
         });
 
         button.addEventListener("mouseleave", () => {
-          buttonImg.src = "./assets/components/btn/btn-green.webp";
+          buttonImg.src = "app/assets/components/btn/btn-green.webp";
         });
       });
     });
