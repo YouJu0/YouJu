@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../../conexion.php");
+include(__DIR__ . '/../connection/module.connection.php');
 
 // Verifica la conexión a la base de datos
 if (!$mysqli) {

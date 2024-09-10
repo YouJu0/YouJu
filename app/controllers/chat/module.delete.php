@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../../conexion.php");
+include(__DIR__ . '/../connection/module.connection.php');
 
 // Verifica si la sesión está iniciada y si el usuario tiene permisos de administrador (Id_rango == 3)
 if (!isset($_SESSION['sesionMain']) || $_SESSION['sesionMain']["Id_rango"] != 3) {

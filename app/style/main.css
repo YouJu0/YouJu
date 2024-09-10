@@ -2447,12 +2447,8 @@ video {
   --tw-bg-opacity: 0.5;
 }
 
-.bg-\[url\(\'\.\.\/\.\.\/assets\/chat\/bg\.webp\'\)\] {
-  background-image: url('../../assets/chat/bg.webp');
-}
-
-.bg-\[url\(\'\/app\/assets\/section-one\/bg\.webp\'\)\] {
-  background-image: url('/app/assets/section-one/bg.webp');
+.bg-\[url\(\'\/app\/assets\/chat\/bg\.webp\'\)\] {
+  background-image: url('/app/assets/chat/bg.webp');
 }
 
 .bg-\[url\(\'\/app\/assets\/section-three\/bg\.webp\'\)\] {

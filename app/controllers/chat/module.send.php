@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../../conexion.php");
+include(__DIR__ . '/../connection/module.connection.php');
 
 if (!isset($_SESSION['sesionMain'])) {
     echo json_encode(["error" => "No estás logueado"]);

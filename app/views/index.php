@@ -1,5 +1,6 @@
 <?php
 include('app/controllers/connection/module.connection.php');
+session_start();
 $offline = array(
   "estado" => "deslogeado",
   "name" => "Invitado"
@@ -12,14 +13,14 @@ if (!isset($_SESSION['sesionMain'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../app/style/main.css">
-  <link rel="stylesheet" href="../../node_modules/swiper/swiper-bundle.min.css">
-  <link rel="stylesheet" href="../..//node_modules/preline/dist/preline.css">
+  <link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../node_modules/preline/dist/preline.css">
 
 
   <title>YouJu | Inicio</title>
@@ -139,11 +140,17 @@ if (!isset($_SESSION['sesionMain'])) {
           ?>
         </div>
       </div>
+
+
+
       <?php if (isset($_SESSION['sesionMain'])): ?>
         <a href="/chat">Chat</a>
       <?php else: ?>
         <button id="openPopup">Chat</button>
       <?php endif; ?>
+      <form method="POST" action="/controller/logout">
+        <button type="submit">Logout</button>
+      </form>
 
 
       <a href="#"><img src="app/assets/general/logo.webp" class="flex h-8" alt=""></a>
@@ -383,11 +390,12 @@ if (!isset($_SESSION['sesionMain'])) {
       <span id="closePopup" class="close">&times;</span>
       <h2>Usuario Offline</h2>
       <p>Para acceder a todo el contenido de la página debes de estar logeado.</p>
-      <a href="./pages/sesiones/login.php">[Log-In]</a>
+      <a href="/login">[Log-In]</a>
       <br>
-      <a href="./pages/sesiones/register.php">[Sign-In]</a>
+      <a href="/register">[Sign-In]</a>
     </div>
   </div>
+
 
   <!-- Scripts -->
   <script src="../node_modules/swiper/swiper-bundle.min.js"></script>
