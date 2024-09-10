@@ -22,7 +22,7 @@ if (
     //verifica si las contraseñas coinciden
     if ($pass === $confpass) {
       //encripto la contrasenia
-      $passcrypt = encryption($pass);
+      $passcrypt = md5($pass);
       //guardo la querry en una variable
       $query = "INSERT INTO `usuarios` (`Id_Usuario`,`Nombre`,`Apellido`,`Contraseña`,`Email`,`Fecha_Nac`,`Lista_N`,`Id_rango`,`User_Valido`) 
             VALUES (null,'$name','$apellido','$passcrypt','$email','$fecha',0,1,0)";

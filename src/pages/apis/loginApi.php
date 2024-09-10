@@ -9,7 +9,7 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
   $email = validarLogin($_POST["email"]);
   $pass = validarLogin($_POST['pass']);
   //encripto la contraseña
-  $passcrypt = encryption($pass);
+  $passcrypt = md5($pass);
   //creo la query
   $Qlogin = "SELECT * FROM `usuarios` where `Email` = '$email' and `Contraseña` = '$passcrypt'";
   //hago la consulta y la cargo en un array
