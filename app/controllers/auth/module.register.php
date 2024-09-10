@@ -1,4 +1,5 @@
 <?php
+
 include(__DIR__ . '/../connection/module.connection.php');
 
 //verifica si los campos no estan vacios
@@ -36,7 +37,7 @@ if (
         exit();
       } //verifico que la consulta se haga correctamente
       if ($resultado) {
-        include("/controller/login");
+        include(__dir__."/module.login.php");
         //Cierro la consulta y la conexion
         $resultado->close();
         exit();
