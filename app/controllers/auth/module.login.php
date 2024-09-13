@@ -1,104 +1,65 @@
 <?php
 session_start();
-//para poder llamarlo
 include(__DIR__ . '/../connection/module.connection.php');
 
-//compruebo si los campos estan seteados
-if (isset($_POST["email"]) && isset($_POST["pass"])) {
-  //cargo los datos validados en variables
-  $email = validarLogin($_POST["email"]);
-  $pass = validarLogin($_POST['pass']);
-  //encripto la contraseña
-  $passcrypt = md5($pass);
-  //creo la query
-  $Qlogin = "SELECT * FROM `usuarios` where `Email` = '$email' and `Contraseña` = '$passcrypt'";
-  //hago la consulta y la cargo en un array
-  $resultado = $mysqli->query($Qlogin);
-  $fila = $resultado->fetch_row();
-  //en caso de ser admin te manda al panel admin
-  if ($resultado->num_rows === 1 && $fila[7] == 3) {
-    logear($fila, $resultado);
-    header("Location: /");
-    CloseALL($resultado);
+// Verificar si el formulario ha sido enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"], $_POST["pass"])) {
+  $email = validarDatos($_POST["email"]);
+  $pass = validarDatos($_POST['pass']);
+
+  // Consulta segura utilizando declaraciones preparadas
+  $stmt = $mysqli->prepare("SELECT * FROM `usuarios` WHERE `Email` = ?");
+  $stmt->bind_param("s", $email);
+  $stmt->execute();
+  $resultado = $stmt->get_result();
+  $fila = $resultado->fetch_assoc();
+
+  if ($fila && password_verify($pass, $fila['Contraseña'])) {
+    // Validar estado del usuario y roles
+    if ($fila['Id_rango'] == 3) { // Admin
+      logear($fila);
+    } elseif ($fila['Id_rango'] == 1 && $fila['User_Valido'] == 1 && $fila['Lista_N'] == 0) { // Usuario activo
+      logear($fila);
+    } elseif ($fila['Lista_N'] == 1) {
+      redirigirConError("Ese usuario ha sido baneado.");
+    } else {
+      redirigirConError("Su cuenta debe ser validada.");
+    }
+  } else {
+    redirigirConError("Usuario o contraseña incorrecta.");
   }
-
-  //compruebo si hay resultados
-  if ($resultado->num_rows === 1 && $fila[7] == 1) {
-    //compruebo que no este en la lista negra
-    if ($fila[6] == 0 && $fila[8] == 1) {
-      sessionEmprendimiento($fila, $mysqli, $resultado);
-    } //de estar en la lista negra se les avisa
-    elseif ($fila[6] == 1) {
-      header("Location: /login?error=Ese usuario a sido 
-          baneado permanentemente no intente registrarse nuevamente.");
-
-      CloseALL($resultado);
-    } //si no es valido le aviso 
-    else {
-      header("Location: /login?error=Su cuenta debe ser validada. Dirijase a la oficina de la juventud, ubicada en el parque, junto a su cedula de identidad para que se verifiquen sus datos");
-      CloseALL($resultado);
-    } //fin de condiciones
-
-  } //si no se encuentra su usuario le aviso
-  else {
-    //fallo principal, no se encontro los datos en la base de datos
-    header("Location: /login?error=Compruebe usuario y contraseña");
-    CloseALL($resultado);
-  } //fin de condiciones
-} //si no esta seteado le aviso
-else {
-  header("Location: /login?error=Los campos son requeridos");
-  exit();
-} //fin de condiciones
-
-/////////////
-//funciones//
-/////////////
-
-
-function sessionEmprendimiento($fila, $mysqli, $result1)
-{
-
-  $queryEmprendimiento = "SELECT `Id_emprendimientos`,`Nombre_Emprendimiento`,`Id_categoria`,`Emprendimiento_valido` 
-  FROM `emprendimientos` WHERE `Id_Usuario` = $fila[0]";
-  try {
-    $result2 = $mysqli->query($queryEmprendimiento);
-    $filaEmprendimiento = $result2->fetch_row();
-  } catch (\Throwable $th) {
-    CloseALL($result1);
-    CloseALL($result2);
-  }
-  $datosSesionEmprendimiento = array(
-    'identificador' => $filaEmprendimiento[0],
-    'nombreEmprendimiento' => $filaEmprendimiento[1],
-    'categoria' => $filaEmprendimiento[2],
-    'validacionEmprendimiento' => $filaEmprendimiento[3]
-  );
-  $_SESSION['datosEmprendimiento'] = $datosSesionEmprendimiento;
-  setcookie("nombreEmprendimiento", $_SESSION['datosEmprendimiento']["nombreEmprendimiento"], time() + 9000);
-  logear($fila, $result1);
-  CloseALL($result2);
-};
-//funcion para logear
-function logear($fila, $resultado)
-{
-  $datosSesion = array('id' => $fila[0], 'nombre' => $fila[1], 'apellido' => $fila[2], 'correo' => $fila[4], 'Lista_N' => $fila[6], 'Id_rango' => $fila[7], 'User_Valido' => $fila[8]);
-  $_SESSION['sesionMain'] = $datosSesion;
-  setcookie("user", $_SESSION['sesionMain']["nombre"], time() + 9000);
-  header("Location: /");
-  CloseALL($resultado);
+  $stmt->close();
+} else {
+  redirigirConError("Todos los campos son requeridos.");
 }
-//funcion para cerrar las conexiones y las consultas
-function CloseALL($resultado)
+
+function logear($user)
 {
-  $resultado->close();
+  $_SESSION['sesionMain'] = [
+    'id' => $user['id'],
+    'nombre' => $user['nombre'],
+    'apellido' => $user['apellido'],
+    'correo' => $user['Email'],
+    'rango' => $user['Id_rango'],
+  ];
+
+  // Configurar cookies seguras
+  setcookie("user", $_SESSION['sesionMain']["nombre"], [
+    'expires' => time() + 9000,
+    'httponly' => true,
+    'secure' => true
+  ]);
+  header("Location: /"); // Redirigir al dashboard o página principal
   exit();
 }
-//funcion para validar los datos
-function validarLogin($datos)
+
+function redirigirConError($mensaje)
 {
-  $datos = trim($datos);
-  $datos = stripcslashes($datos);
-  $datos = htmlspecialchars($datos);
-  return $datos;
+  header("Location: /login?error=" . urlencode($mensaje));
+  exit();
+}
+
+function validarDatos($data)
+{
+  return htmlspecialchars(trim(stripslashes($data)));
 }

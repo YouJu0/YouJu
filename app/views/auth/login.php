@@ -1,12 +1,16 @@
 <?php
 session_start();
 if (isset($_SESSION['sesionMain'])) {
+  session_set_cookie_params(30); // La duración de la cookie es de 30 segundos.
   header("Location: /");
-  session_set_cookie_params(60 * 0.5);
+  exit(); // Añadir exit para detener la ejecución después de la redirección
 }
 ?>
 <script>
-  localStorage.setItem("user" = $_SESSION["sesionMain"]["nombre"]);
+  // Asignar el nombre de usuario a localStorage correctamente
+  <?php if (isset($_SESSION['sesionMain'])): ?>
+    localStorage.setItem("user", "<?php echo $_SESSION['sesionMain']['nombre']; ?>");
+  <?php endif; ?>
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,33 +19,18 @@ if (isset($_SESSION['sesionMain'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/app/style/main.css">
-  <title>cuenta</title>
+  <title>Iniciar sesión</title>
 </head>
 
 <body>
   <form action="/controller/login" method="POST">
-    <h1> Iniciar sesion</h1>
-    <hr>
-    <?php
-    if (isset($_GET['error'])) {
-    ?>
-      <p class="error">
-        <?php
-        echo $_GET['error']
-        ?>
-      </p>
-    <?php
-    }
-    ?>
-    <hr>
-    <label for="">Email: </label>
-    <input type="email" name="email" placeholder="Ingrese su correo electronico"
-      key>
-    <label for="">Contraseña: </label>
+    <label for="email">Email:</label>
+    <input type="email" name="email" placeholder="Ingrese su correo electrónico" required>
+    <br>
+    <label for="password">Contraseña:</label>
     <input type="password" name="pass" placeholder="Ingrese su contraseña" required>
     <br>
-    <button type="submit">[ -Iniciar sesion- ]</button>
-    <a href="/register">[ -Registrarse- ]</a>
+    <button type="submit">[ -Iniciar sesión- ]</button>
   </form>
 </body>
 
