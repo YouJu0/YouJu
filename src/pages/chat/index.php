@@ -5,19 +5,18 @@ if (!isset($_SESSION['sesionMain'])) {
   exit(); // Asegurar que el script termine después de la redirección
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-
   <!-- Cabeza de la pagina -->
   <header class="flex flex-row fixed z-[999] h-9 bg-[#e07f49] py-5 items-center justify-between px-2 top-0 w-screen">
     <div class="flex items-center h-full flex-row gap-4 justify-center">
@@ -108,10 +107,12 @@ if (!isset($_SESSION['sesionMain'])) {
         <div class="chat-box flex overflow-y-scroll w-full h-[90%] flex-col-reverse pr-4" id="chat-box">
 
         </div>
+
         <form id="chat-form" class="flex relative h-16 border-[8px] border-[#3d5b4f] rounded-2xl p-2 items-center justify-between">
+          <input type="hidden" id="user-name" name="user-name" value="<?php echo $_SESSION['sesionMain']['nombre'];   ?>">
           <input type="hidden" id="forum-id" name="forum-id" value="1">
           <input type="text" class="flex w-4/5 rounded-md outline-none p-2 h-full" id="message" name="message" placeholder="Escribe un mensaje..." required>
-          <button class="btn-send" type="submit">
+          <button type="submit" class="btn-send" id="submit-btn">
             <img src="../../assets/components/btn-send/btn-send.webp" class="btn w-14" alt="">
           </button>
         </form>
@@ -129,7 +130,7 @@ if (!isset($_SESSION['sesionMain'])) {
       const chatBox = document.getElementById('chat-box');
       const isAdmin = <?php echo $_SESSION['sesionMain']["Id_rango"] == 3 ? 'true' : 'false'; ?>;
       const currentUser = "<?php echo $_SESSION['sesionMain']['nombre']; ?>"; // Nombre del usuario actual
-
+      const conn = new WebSocket('ws://localhost:8080');
       console.log("Is Admin:", isAdmin); // Verifica si isAdmin es correcto
 
       // Cambiar de foro usando botones
@@ -142,6 +143,51 @@ if (!isset($_SESSION['sesionMain'])) {
           forumIdInput.value = this.getAttribute('data-forum');
           loadMessages(); // Recargar mensajes para el foro seleccionado
         });
+      });
+
+      $(document).ready(function() {
+        conn.onopen = function(e) {
+          console.log("¡Conexión establecida!");
+        };
+        conn.onerror = function(error) {
+          console.error("Error en la conexión WebSocket: ", error);
+        };
+        conn.onclose = function(e) {
+          console.log("Conexión cerrada: ", e);
+        };
+
+
+        conn.onmessage = function(e) {
+          var respuesta = JSON.parse(e.data);
+          var nombre = "<?php echo $_SESSION['sesionMain']['nombre'] ?>"
+          var rango = "<?php echo $_SESSION['sesionMain']['Id_rango'] ?>"
+
+          const chatBox = document.getElementById('chat-box');
+          let alignment = ''; // Variable para la alineación de los mensajes
+          let bgColor = 'bg-gray-200'; // Color de fondo por defecto
+
+          if (rango > 1) {
+            var deleteButton = `<button class="ml-2 text-red-500" onclick="">Eliminar</button>`;
+          } else {
+            var deleteButton = '';
+          }
+          if (respuesta.username === nombre) {
+            alignment = 'text-right'; // Alineación derecha si el usuario envió el mensaje
+            bgColor = 'bg-blue-200'; // Cambiar el color de fondo para los mensajes del usuario actual
+          } else {
+            alignment = 'text-left'; // Alineación izquierda para otros usuarios
+          }
+          // Renderizar los mensajes en la caja de chat
+          chatBox.innerHTML += `<div class="message mb-4 ${alignment}">
+                                    <div class="inline-block ${bgColor} p-4 rounded-md max-w-xs">
+                                        <span class="font-semibold">${respuesta.usuario_name}:</span>
+                                        <span>${respuesta.mensaje}</span>
+                                        <br>
+                                        <small class="text-gray-500">${respuesta.created_at}</small>
+                                        ${deleteButton}
+                                    </div>
+                                </div>`;
+        };
       });
 
       // Función para cargar los mensajes del foro seleccionado
@@ -178,12 +224,11 @@ if (!isset($_SESSION['sesionMain'])) {
             chatBox.scrollTop = chatBox.scrollHeight; // Scroll automático al final
           })
           .catch(error => console.error('Error al cargar los mensajes:', error));
-      }
+      } //end function load msg
 
       document.getElementById('chat-form').addEventListener('submit', function(event) {
         event.preventDefault();
         const messageInput = document.getElementById('message');
-
         fetch('./send_Msg.php', {
             method: 'POST',
             headers: {
@@ -200,20 +245,30 @@ if (!isset($_SESSION['sesionMain'])) {
               console.error('Error al enviar el mensaje:', data.error);
             } else {
               messageInput.value = '';
-              loadMessages(); // Recargar los mensajes
             }
           })
           .catch(error => console.error('Error al enviar el mensaje:', error));
-      });
 
-      function startRefresh() {
-        setInterval(() => loadMessages(), 5000); // Actualiza cada 5 segundos
-      }
+        event.preventDefault(); // Evita el envío del formulario de manera tradicional
+        var msg = $('#message').val();
+        var chattype = $('#forum-id').val();
+        var user_name = $('#user-name').val();
+        var enviar = {
+          'usuario_name': user_name,
+          'mensaje': msg,
+          'chat': chattype,
+          'created_at': new Date().toISOString() // Timestamp
+        };
+        conn.send(JSON.stringify(enviar));
+        $('#message').val(''); // Limpiar el campo de mensaje después de enviarlo
 
-      startRefresh();
+      }); //end click event
+
+
       loadMessages();
     });
   </script>
+
 </body>
 
 </html>

@@ -19,7 +19,6 @@ if (!isset($_SESSION['sesionMain'])) {
   <link rel="stylesheet" href="./main.css">
   <link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.min.css">
   <link rel="stylesheet" href="../node_modules/preline/dist/preline.css">
-
   <title>YouJu | Inicio</title>
   <style>
     html {
