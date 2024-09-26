@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['sesionMain'])) {
-  header("Location: ../../index.php");
+  header("Location: /");
   exit(); // Asegurar que el script termine después de la redirección
 }
 ?>
@@ -12,7 +12,7 @@ if (!isset($_SESSION['sesionMain'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/src/main.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -23,7 +23,7 @@ if (!isset($_SESSION['sesionMain'])) {
       <!-- Menú desplegable de izquierda a derecha -->
       <div class="hs-dropdown relative inline-flex">
         <button id="hs-menu-trigger" type="button" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm font-semibold">
-          <img src="../../assets/menu.svg" class="h-5" alt="">
+          <img src="/src/assets/menu.svg" class="h-5" alt="">
         </button>
         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[200px] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-menu-trigger">
           <?php
@@ -45,13 +45,13 @@ if (!isset($_SESSION['sesionMain'])) {
         : '<button id="openPopup">Foro</button>';
       ?>
 
-      <a href="#"><img src="../../assets/logo.png" class="flex h-8" alt=""></a>
+      <a href="#"><img src="/src/assets/logo.png" class="flex h-8" alt=""></a>
     </div>
 
     <div class="flex items-center h-full flex-row gap-4 justify-center">
       <div class="hs-dropdown relative inline-flex">
         <button id="hs-dropdown-custom-trigger" type="button" class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full">
-          <img class="w-8 h-auto rounded-full" src="../../assets/header/users.webp">
+          <img class="w-8 h-auto rounded-full" src="/src/assets/header/users.webp">
           <span class="text-[#1B3A61] font-medium truncate max-w-[7.5rem]">
             <?php echo isset($_SESSION['sesionMain']) ? $_SESSION['sesionMain']['nombre'] : $offline["name"]; ?>
           </span>
@@ -85,7 +85,7 @@ if (!isset($_SESSION['sesionMain'])) {
 
 
   <!-- Fin de la sección de encabezado -->
-  <main class="bg-[url('../../assets/chat/bg.webp')] flex flex-row w-full h-screen items-center align-middle bg-cover bg-center pt-10 relative">
+  <main class="bg-[url('/src/assets/chat/bg.webp')] flex flex-row w-full h-screen items-center align-middle bg-cover bg-center pt-10 relative">
     <!-- Selección de Foro con botones estilo pestaña a la izquierda -->
     <div class="flex flex-col relative w-1/4 justify-end items-end right-0 gap-4 ">
       <button id="forum-btn-1" class="forum-btn flex flex-col relative bg-teal-400 border-4 border-green-800 rounded-l-lg px-6 py-2 text-blue-400 overflow-hidden" data-forum="1">
@@ -113,7 +113,7 @@ if (!isset($_SESSION['sesionMain'])) {
           <input type="hidden" id="forum-id" name="forum-id" value="1">
           <input type="text" class="flex w-4/5 rounded-md outline-none p-2 h-full" id="message" name="message" placeholder="Escribe un mensaje..." required>
           <button type="submit" class="btn-send" id="submit-btn">
-            <img src="../../assets/components/btn-send/btn-send.webp" class="btn w-14" alt="">
+            <img src="/src/assets/components/btn-send/btn-send.webp" class="btn w-14" alt="">
           </button>
         </form>
 

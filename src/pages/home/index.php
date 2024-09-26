@@ -143,7 +143,7 @@ if (!isset($_SESSION['sesionMain'])) {
       </div>
 
       <!-- Enlace al foro o botón para abrir el popup -->
-      <?php echo isset($_SESSION['sesionMain']) ? '<a href="/src/pages/chat/"> Chat </a>' : '<button id="openPopup">Chat</button>'; ?>
+      <?php echo isset($_SESSION['sesionMain']) ? '<a href="/chat"> Chat </a>' : '<button id="openPopup">Chat</button>'; ?>
       <a href="#"><img src="/src/assets/logo.png" class="flex h-8" alt=""></a>
     </div>
 

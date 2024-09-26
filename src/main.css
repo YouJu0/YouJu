@@ -731,6 +731,10 @@ video {
   margin-top: 2.25rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .block {
   display: block;
 }
@@ -1257,6 +1261,10 @@ video {
   background-image: url('/src/assets/section-two/bg.webp');
 }
 
+.bg-\[url\(\'\/src\/assets\/chat\/bg\.webp\'\)\] {
+  background-image: url('/src/assets/chat/bg.webp');
+}
+
 .bg-cover {
   background-size: cover;
 }
@@ -1405,6 +1413,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
 }
 
 .font-bold {

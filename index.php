@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'src/conexion.php'; // Asegúrate de que la conexión a la base de datos esté incluida
+require_once 'src/config/conexion.php'; // Asegúrate de que la conexión a la base de datos esté incluida
 
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -8,7 +8,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 // Enrutamiento básico
 switch ($requestUri) {
     case '/':
-        include 'src/index.php'; // Página de inicio
+        include 'src/pages/home/index.php'; // Página de inicio
         break;
 
     case '/chat':
@@ -40,7 +40,6 @@ switch ($requestUri) {
         break;
 
     default:
-        // Manejo de 404
         http_response_code(404);
         include 'src/pages/404.php'; // Página de error 404
         break;
