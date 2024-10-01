@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (!isset($_SESSION['sesionMain'])) {
   //si no está seteada te manda para login
   //header("Location: ./pages/sesiones/login.php");
@@ -7,6 +8,9 @@ if (!isset($_SESSION['sesionMain'])) {
     "name" => "Invitado"
   );
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -142,7 +146,7 @@ if (!isset($_SESSION['sesionMain'])) {
 
       <!-- Enlace al foro o botón para abrir el popup -->
       <?php echo isset($_SESSION['sesionMain']) ? '<a href="/chat"> Chat </a>' : '<button id="openPopup">Chat</button>'; ?>
-      <a href="#"><img src="/src/assets/logo.png" class="flex h-8" alt=""></a>
+      <a href="#"><img src="/src/assets/general/logo.webp" class="flex h-8" alt=""></a>
     </div>
 
     <div class="flex items-center h-full flex-row gap-4 justify-center">
@@ -150,7 +154,7 @@ if (!isset($_SESSION['sesionMain'])) {
         <button id="hs-dropdown-custom-trigger" type="button" class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full">
           <img class="w-8 h-auto rounded-full" src="src/assets/header/users.webp">
           <span class="text-[#1B3A61] font-medium truncate max-w-[7.5rem]">
-            <?php echo isset($_SESSION['sesionMain']) ? $_SESSION['sesionMain']['nombre'] : $offline["name"]; ?>
+            <?php echo isset($_SESSION['sesionMain']) ? $_SESSION['sesionMain']['Nombre'] : $offline["name"]; ?>
           </span>
         </button>
         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-dropdown-custom-trigger">
@@ -350,17 +354,17 @@ if (!isset($_SESSION['sesionMain'])) {
   <div id="popup" class="popup">
     <div class="popup-content">
       <span id="closePopup" class="close">&times;</span>
-      <h2>Usuario Offline</h2>
-      <p>para acceder a todo el contenido de la pagina debes de estar logeado</p>
-      <a href="./pages/sesiones/login.php">[Log-In]</a>
+      <h2>El usuario no tiene una sesión activa</h2>
+      <p>Para acceder a todo el contenido de la pagina debes de estar logeado</p>
+      <a href="/login">Iniciar sesión</a>
       <br>
-      <a href="./pages/sesiones/register.php">[Sign-In]</a>
+      <a href="/register">Registrarse</a>
     </div>
   </div>
 
   <!-- Scripts -->
-  <script src="../node_modules/swiper/swiper-bundle.min.js"></script>
-  <script src="../node_modules/preline/dist/preline.js"></script>
+  <script src="/node_modules/swiper/swiper-bundle.min.js"></script>
+  <script src="/node_modules/preline/dist/preline.js"></script>
   <script>
     var swiper = new Swiper(".swiper-container", {
       slidesPerView: 1.7,
