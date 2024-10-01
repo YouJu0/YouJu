@@ -10,5 +10,5 @@ if ($mysqli->connect_errno) {
     die('algo fallo' . $mysqli->connect_error);
 }
 
-error_reporting(0); // Desactiva la visualización de errores
+error_reporting(0);
 ?>

@@ -13,78 +13,18 @@ if (!isset($_SESSION['sesionMain'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat</title>
   <link rel="stylesheet" href="/src/css/main.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
   <!-- Cabeza de la pagina -->
-  <header class="flex flex-row fixed z-[999] h-9 bg-[#e07f49] py-5 items-center justify-between px-2 top-0 w-screen">
-    <div class="flex items-center h-full flex-row gap-4 justify-center">
-      <!-- Menú desplegable de izquierda a derecha -->
-      <div class="hs-dropdown relative inline-flex">
-        <button id="hs-menu-trigger" type="button" class="hs-dropdown-toggle flex items-center gap-x-2 text-sm font-semibold">
-          <img src="/src/assets/menu.svg" class="h-5" alt="">
-        </button>
-        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[200px] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-menu-trigger">
-          <?php
-          $menuItems = [
-            'Inicio' => '#',
-            'Servicios' => '#',
-            'Contacto' => '#'
-          ];
-          foreach ($menuItems as $itemName => $itemLink) {
-            echo "<a class='flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700' href='$itemLink'>$itemName</a>";
-          }
-          ?>
-        </div>
-        
-      </div>
+  <?php
+  
+  $headerColor = "#e07f49";
+  $mainMenu = ['/', 'Inicio'];
 
-      <?php
-
-      echo isset($_SESSION['sesionMain'])
-        ? '<a href="/YouJu/"> Inicio </a>'
-        : '<button id="openPopup">Foro</button>';
-      ?>
-
-      <a href="#"><img src="/src/assets/logo.png" class="flex h-8" alt=""></a>
-    </div>
-
-    <div class="flex items-center h-full flex-row gap-4 justify-center">
-      <div class="hs-dropdown relative inline-flex">
-        <button id="hs-dropdown-custom-trigger" type="button" class="hs-dropdown-toggle py-1 ps-1 pe-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-full">
-          <img class="w-8 h-auto rounded-full" src="/src/assets/header/users.webp">
-          <span class="text-[#1B3A61] font-medium truncate max-w-[7.5rem]">
-            <?php echo isset($_SESSION['sesionMain']) ? $_SESSION['sesionMain']['nombre'] : $offline["name"]; ?>
-          </span>
-        </button>
-        <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700" aria-labelledby="hs-dropdown-custom-trigger">
-          <?php if (!isset($_SESSION['sesionMain'])): ?>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/login.php">Log-In</a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/register.php">Sign-In</a>
-          <?php else: ?>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">Configuración</a>
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">Mi Perfil</a>
-
-            <?php if ($_SESSION['sesionMain']["Id_rango"] == 3): ?>
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/admin/panelAdmin.php">panel admin</a>
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['datosEmprendimiento'])): ?>
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./emprendimiento.php">
-                emprendimiento : <?php echo $_SESSION['datosEmprendimiento']["nombreEmprendimiento"]; ?>
-              </a>
-            <?php else: ?>
-              <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="./pages/sesiones/registerEmprendimiento.php">Registrar emprendimiento</a>
-            <?php endif; ?>
-
-            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/session-close">Cerrar sesión</a>
-          <?php endif; ?>
-        </div>
-      </div>
-    </div>
-  </header>
-
+  include 'src/components/header.php';
+  ?>
 
   <!-- Fin de la sección de encabezado -->
   <main class="bg-[url('/src/assets/chat/bg.webp')] flex flex-row w-full h-screen items-center align-middle bg-cover bg-center pt-10 relative">
@@ -270,7 +210,10 @@ if (!isset($_SESSION['sesionMain'])) {
       loadMessages();
     });
   </script>
+<script type="module">
+import preline from 'https://cdn.jsdelivr.net/npm/preline@2.5.0/+esm'
 
+</script>
 </body>
 
 </html>
