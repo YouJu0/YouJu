@@ -37,27 +37,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
                     $resultado = $mysqli->query($query);
                     if ($resultado) {
-                        header("Location: /login?success=Registro exitoso, por favor inicie sesión.");
+                        $_SESSION['status'] = "Registro exitoso, por favor inicie sesión.";
+
+                        header("Location: /login");
                         exit();
                     } else {
-                        header("Location: /register?error=Error al registrar, intente nuevamente.");
+                        $_SESSION['status'] = "Error al registrar, intente nuevamente.";
+                        header("Location: /register");
                         exit();
                     }
                 } catch (\Throwable $th) {
-                    header("Location: /register?error=El correo ya está registrado o algo ha ido mal.");
+                    $_SESSION['status'] = "El correo ya está registrado o algo ha ido mal.";
+
+                    header("Location: /register");
                     exit();
                 }
             } else {
-                header("Location: /register?error=Las contraseñas no coinciden.");
+                $_SESSION['status'] = "Las contraseñas no coinciden.";
+
+                header("Location: /register");
                 exit();
             }
         } else {
-            header("Location: /register?error=Debe tener entre 14 y 29 años para registrarse.");
+            $_SESSION['status'] = "Debe tener entre 14 y 29 años para registrarse.";
+
+            header("Location: /register");
             exit();
         }
     } else {
-        error_log("Faltan campos en el formulario."); // Registro de error
-        header("Location: /register?error=Todos los campos son requeridos.");
+        $_SESSION['status'] = "Todos los campos son requeridos.";
+        header("Location: /register");
         exit();
     }
 } 

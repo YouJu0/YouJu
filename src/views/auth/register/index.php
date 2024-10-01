@@ -20,15 +20,16 @@ if (isset($_SESSION['sesionMain'])) {
     <h1> Iniciar sesion</h1>
     <hr>
     <?php
-    if (isset($_GET['error'])) {
-    ?>
-      <p class="error">
-        <?php
-        echo $_GET['error']
-        ?>
-      </p>
-    <?php
-    }
+    if (isset($_SESSION['status'])) {
+      ?>
+        <p class="error">
+          <?php
+          echo $_SESSION['status'];
+          unset($_SESSION['status']);
+          ?>
+        </p>
+      <?php
+      }
     ?>
     <hr>
     <!-- -->

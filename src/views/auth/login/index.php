@@ -25,11 +25,12 @@ localStorage.setItem("user"= $_SESSION["sesionMain"]["nombre"]);
     <h1> Iniciar sesion</h1>
     <hr>
     <?php
-    if (isset($_GET['error'])) {
+    if (isset($_SESSION['status'])) {
     ?>
       <p class="error">
         <?php
-        echo $_GET['error']
+        echo $_SESSION['status'];
+        unset($_SESSION['status']);
         ?>
       </p>
     <?php

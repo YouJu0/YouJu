@@ -19,22 +19,27 @@ if (isset($_POST["email"]) && isset($_POST["pass"])) {
         // Verifico la contraseña
         if (password_verify($pass, $fila['Contraseña'])) {
             // Contraseña correcta, inicio sesión
-            $_SESSION['sesionMain'] = $fila; // Guarda los datos del usuario en la sesión
-            header("Location: /"); // Redirige a la página principal
+            $_SESSION['sesionMain'] = $fila; 
+            header("Location: /"); 
             exit();
         } else {
             // Contraseña incorrecta
-            header("Location:/login?error=Credenciales incorrectas.");
+
+            $_SESSION['status'] = "Credenciales incorrectas.";
+            header("Location:/login");
             exit();
         }
     } else {
         // Usuario no encontrado
-        header("Location:/login?error=Credenciales incorrectas.");
+        $_SESSION['status'] = "Credenciales incorrectas.";
+
+        header("Location:/login");
         exit();
     }
 } else {
     // Campos no seteados
-    header("Location:/login?error=Los campos son requeridos.");
+    $_SESSION['status'] = "Todos los campos son necesarios";
+    header("Location:/login");
     exit();
 }
 

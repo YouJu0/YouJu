@@ -16,7 +16,7 @@ $headerColor = isset($headerColor) ? $headerColor : "#A7DE72";
           <?php
           $menuItems = [
             'Inicio' => '/',
-            'Servicios' => '/#servicios',
+            'Servicios' => '#services',
           ];
           foreach ($menuItems as $itemName => $itemLink) {
             echo "<a class='flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700' href='$itemLink'>$itemName</a>";
@@ -27,7 +27,7 @@ $headerColor = isset($headerColor) ? $headerColor : "#A7DE72";
 
       <!-- Enlace al foro o botón para abrir el popup -->
       <?php echo isset($_SESSION['sesionMain']) ? '<a href="'. $mainMenu[0].'">' .  $mainMenu[1]. '</a>' : '<button id="openPopup">Chat</button>'; ?>
-      <a href="#"><img src="/src/assets/general/logo.webp" class="flex h-8" alt=""></a>
+      <a href="/"><img src="/src/assets/general/logo.webp" class="flex h-8" alt=""></a>
     </div>
 
     <div class="flex items-center h-full flex-row gap-4 justify-center">
