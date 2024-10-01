@@ -134,12 +134,12 @@ if (!isset($_SESSION['sesionMain'])) {
 
       // Función para cargar los mensajes del foro seleccionado
       function loadMessages(offset = 0) {
-        fetch(`./get_Msg.php?forum_id=${forumIdInput.value}&offset=${offset}`)
+        fetch(`/getMessage?forum_id=${forumIdInput.value}&offset=${offset}`)
           .then(response => response.json())
           .then(data => {
             chatBox.innerHTML = ''; // Limpiar el contenido del chat box
             data.forEach(msg => {
-              let deleteButton = isAdmin ? `<button class="ml-2 text-red-500" onclick="eliminarMSG(${msg.msgId})">Eliminar</button>` : '';
+              // let deleteButton = isAdmin ? `<button class="ml-2 text-red-500" onclick="eliminarMSG(${msg.msgId})">Eliminar</button>` : '';
               let alignment = ''; // Variable para la alineación de los mensajes
               let bgColor = 'bg-gray-200'; // Color de fondo por defecto
 
@@ -171,7 +171,7 @@ if (!isset($_SESSION['sesionMain'])) {
       document.getElementById('chat-form').addEventListener('submit', function(event) {
         event.preventDefault();
         const messageInput = document.getElementById('message');
-        fetch('./send_Msg.php', {
+        fetch('/sendMessage', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
