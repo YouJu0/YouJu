@@ -15,10 +15,10 @@ class Chat implements MessageComponentInterface
     echo "El servidor se inició correctamente\n";
   }
 
-  public function onOpen(ConnectionInterface $conn)
+  public function onOpen(ConnectionInterface $mysqli)
   {
-    $this->clients->attach($conn);
-    echo "Nueva conexión! ({$conn->resourceId})\n";
+    $this->clients->attach($mysqli);
+    echo "Nueva conexión! ({$mysqli->resourceId})\n";
   }
 
   public function onMessage(ConnectionInterface $from, $msg)
@@ -38,15 +38,15 @@ class Chat implements MessageComponentInterface
     }
   }
 
-  public function onClose(ConnectionInterface $conn)
+  public function onClose(ConnectionInterface $mysqli)
   {
-    $this->clients->detach($conn);
-    echo "Conexión {$conn->resourceId} ha sido desconectada\n";
+    $this->clients->detach($mysqli);
+    echo "Conexión {$mysqli->resourceId} ha sido desconectada\n";
   }
 
-  public function onError(ConnectionInterface $conn, \Exception $e)
+  public function onError(ConnectionInterface $mysqli, \Exception $e)
   {
     echo "Ocurrió un error: {$e->getMessage()}\n";
-    $conn->close();
+    $mysqli->close();
   }
 }
