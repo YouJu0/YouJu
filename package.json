@@ -8,13 +8,16 @@
     "start": "node ./src/scripts/index.js",
     "installALL": "npm install npx tailwindcss install",
     "style": "npx tailwindcss -i ./input.css -o ./src/main.css --watch",
-    "websocket":"php bin/web.server.php"
+    "build:css": "npx tailwindcss -i ./src/assets/css/tailwind.css -o ./src/assets/css/style.css --watch",
+    "websocket": "php bin/web.server.php"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "tailwindcss": "^3.4.3"
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13"
   },
   "dependencies": {
     "composer": "^4.1.0",

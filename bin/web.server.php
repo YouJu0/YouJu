@@ -8,12 +8,13 @@ use MyApp\Chat;
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $server = IoServer::factory(
-  new HttpServer(
-    new WsServer(
-      new Chat()
-    )
-  ),
-  8080
+    new HttpServer(
+        new WsServer(
+            new Chat()
+        )
+    ),
+    8080
 );
 
+echo "Servidor WebSocket iniciado en el puerto 8080\n";
 $server->run();

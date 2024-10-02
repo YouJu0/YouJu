@@ -2,7 +2,7 @@
 session_start();
 include 'src/controllers/conn.php';
 
-$requestUri = $_SERVER['REQUEST_URI'];
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // Solo obtener la ruta sin parámetros de consulta
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 // Función para verificar rutas
@@ -11,7 +11,7 @@ function matchRoute($route) {
     return preg_match('#^' . preg_quote($route, '#') . '\/?$#', $requestUri);
 }
 
-// Enrutamiento básico t
+// Enrutamiento básico
 switch (true) {
     case matchRoute('/'):
         include 'src/views/home/index.php';
@@ -48,6 +48,7 @@ switch (true) {
     case matchRoute('/business/error'):
         include 'src/views/business/error.php';
         break;
+    
     case (preg_match('/^\/business\/categoria\/(\d+)\/?$/', $requestUri, $matches) ? true : false):
         include 'src/views/business/category.php';
         break;
@@ -57,6 +58,12 @@ switch (true) {
         break;
 
     case matchRoute('/chat'):
+        // Aquí manejamos los parámetros de consulta como 'user-name', 'forum-id', 'message'
+        $userName = isset($_GET['user-name']) ? $_GET['user-name'] : null;
+        $forumId = isset($_GET['forum-id']) ? $_GET['forum-id'] : null;
+        $message = isset($_GET['message']) ? $_GET['message'] : null;
+
+        // Ahora puedes procesar estos valores en tu vista o controlador
         include 'src/views/chat/index.php';
         break;
 

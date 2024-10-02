@@ -12,7 +12,7 @@ class Chat implements MessageComponentInterface
   public function __construct()
   {
     $this->clients = new \SplObjectStorage;
-    echo "El servidor se inició correctamente\n ";
+    echo "El servidor se inició correctamente\n";
   }
 
   public function onOpen(ConnectionInterface $conn)
@@ -23,19 +23,18 @@ class Chat implements MessageComponentInterface
 
   public function onMessage(ConnectionInterface $from, $msg)
   {
-    $msgData = json_decode($msg, true); // Decodificar el mensaje recibido
-    $i = 1;
+    $msgData = json_decode($msg, true);
+
+    // Enviar el mensaje a todos los clientes conectados excepto al emisor
     foreach ($this->clients as $client) {
-      if ($from !== $client && $i == 1) {
-        // Enviar el mensaje a todos los clientes conectados
+      if ($from !== $client) {
         $client->send(json_encode([
           'usuario_name' => $msgData['usuario_name'],
           'mensaje' => $msgData['mensaje'],
-          'created_at' => $msgData['created_at'] // Asegúrate de incluir este campo si está presente
+          'created_at' => $msgData['created_at']
         ]));
         echo "Mensaje enviado desde el usuario: {$from->resourceId} al usuario: {$client->resourceId}\n";
       }
-      $i++;
     }
   }
 

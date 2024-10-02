@@ -19,7 +19,7 @@ if (!isset($_SESSION['sesionMain'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/src/css/main.css">
+  <link href="/src/assets/css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css">
   <link rel="stylesheet" href="/node_modules/preline/dist/preline.css">
   <title>YouJu | Inicio</title>
